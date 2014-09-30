@@ -1,0 +1,170 @@
+include_directories($ENV{HOME}/projects/shot)
+include_directories(${PROJECT_SOURCE_DIR}/server)
+
+#link_directories($ENV{HOME}/build/shot)
+set(MONGO_DIR $ENV{HOME}/build/mongo-cxx-driver-legacy-0.0-26compat-2.6.2)
+include_directories(${MONGO_DIR}/src)
+include_directories(${MONGO_DIR}/build/linux2/use-system-boost/)
+link_directories(${MONGO_DIR})
+link_directories(${MONGO_DIR}/src)
+
+# TODO: check DEBUG flag and set minimizers
+
+set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+set(CMAKE_CXX_FLAGS "-Wall -O2 -std=c++11")
+
+add_library(mongoclient STATIC IMPORTED)
+set_property(TARGET mongoclient PROPERTY
+  IMPORTED_LOCATION ${MONGO_DIR}/libmongoclient.a)
+
+set(IMAGE64 python $ENV{HOME}/bin/image64.py)
+set(SRC_THEME ${PROJECT_SOURCE_DIR}/theme)
+set(BASE_THEME $ENV{HOME}/projects/wr/theme)
+set(DIR_STATIC ${PROJECT_BINARY_DIR}/static)
+set(DIR_APP ${DIR_STATIC}/app)
+set(DIR_IMG ${DIR_STATIC}/img)
+set(DIR_THEME ${DIR_STATIC}/theme)
+
+add_subdirectory($ENV{HOME}/projects/shot shot)
+add_subdirectory($ENV{HOME}/projects/wr wr)
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_link_libraries(${PROJECT_NAME}
+  shot
+)
+
+add_custom_target(static_dir ALL)
+add_custom_command(TARGET static_dir
+  COMMAND ${CMAKE_COMMAND} -E make_directory ${DIR_STATIC}
+  COMMAND ${CMAKE_COMMAND} -E make_directory ${DIR_APP}
+  COMMAND ${CMAKE_COMMAND} -E make_directory ${DIR_IMG}
+  COMMAND ${CMAKE_COMMAND} -E make_directory ${DIR_THEME}
+)
+
+set(WR_JS ${PROJECT_BINARY_DIR}/wr/wr.js)
+set(UI_JS ${PROJECT_BINARY_DIR}/wr/ui.js)
+
+set(CLIENT_LOADER_SOURCES ${WR_JS}  ${UI_JS} ${CLIENT_LOADER_SOURCES})
+set(LOGIN_LOADER_SOURCES ${WR_JS} ${UI_JS} ${LOGIN_LOADER_SOURCES})
+set(ADMIN_LOADER_SOURCES ${WR_JS} ${UI_JS} ${ADMIN_LOADER_SOURCES})
+
+add_custom_target(wr_js ALL
+  COMMAND ${CMAKE_COMMAND} -E copy ${WR_JS} ${DIR_APP}/wr.js
+)
+add_dependencies(wr_js wr static_dir)
+
+
+# build client loader theme
+add_custom_target(client_loader_theme ALL
+  COMMAND sassc -I ${SRC_THEME} -I ${BASE_THEME} ${SRC_THEME}/client/loader.scss ${PROJECT_BINARY_DIR}/client_loader.css
+  COMMAND ${IMAGE64} ${DIR_THEME}/client_loader.css ${PROJECT_BINARY_DIR}/client_loader.css ${SRC_THEME}
+)
+add_dependencies(client_loader_theme static_dir)
+
+# TODO: inline imgs client loader theme
+# TODO: minimize client loader theme
+
+# build client_loader.js
+add_custom_target(client_loader_js ALL
+  COMMAND cat ${CLIENT_LOADER_SOURCES} > ${DIR_APP}/client_loader.js
+  DEPENDS ${CLIENT_LOADER_SOURCES}
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+)
+add_dependencies(client_loader_js wr_js static_dir client_loader_theme client_js)
+
+# TODO: minimize client_loader.js
+
+# build client theme
+add_custom_target(client_theme ALL
+  COMMAND sassc -I ${SRC_THEME} -I ${BASE_THEME} ${SRC_THEME}/client/main.scss ${PROJECT_BINARY_DIR}/client.css
+  COMMAND ${IMAGE64} ${DIR_THEME}/client.css ${PROJECT_BINARY_DIR}/client.css ${SRC_THEME}
+)
+add_dependencies(client_theme static_dir)
+
+# TODO: inline imgs client theme
+# TODO: minimize client theme
+
+# build client.js
+add_custom_target(client_js ALL
+  COMMAND cat ${CLIENT_SOURCES} > ${DIR_APP}/client.js
+  DEPENDS ${CLIENT_SOURCES}
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+)
+add_dependencies(client_js client_theme static_dir)
+
+# TODO: minimize client.js
+#COMMAND ${CMAKE_COMMAND} -E copy ${DIR_APP}/client.js
+
+# build admin loader theme
+add_custom_target(admin_loader_theme ALL
+  COMMAND sassc -I ${SRC_THEME} -I ${BASE_THEME} ${SRC_THEME}/admin/loader.scss ${PROJECT_BINARY_DIR}/admin_loader.css
+  COMMAND ${IMAGE64} ${DIR_THEME}/admin_loader.css ${PROJECT_BINARY_DIR}/admin_loader.css ${SRC_THEME}
+)
+add_dependencies(admin_loader_theme static_dir)
+
+# build admin_loader.js
+add_custom_target(admin_loader_js ALL
+  COMMAND cat ${ADMIN_LOADER_SOURCES} > ${DIR_APP}/admin_loader.js
+  DEPENDS ${ADMIN_LOADER_SOURCES}
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+)
+add_dependencies(admin_loader_js admin_loader_theme wr_js static_dir admin_js)
+
+# build login_loader_theme
+add_custom_target(login_loader_theme ALL
+  COMMAND sassc -I ${SRC_THEME} -I ${BASE_THEME} ${SRC_THEME}/login/loader.scss ${PROJECT_BINARY_DIR}/login_loader.css
+  COMMAND ${IMAGE64} ${DIR_THEME}/login_loader.css ${PROJECT_BINARY_DIR}/login_loader.css ${SRC_THEME}
+)
+
+# build login_loader_js
+add_custom_target(login_loader_js ALL
+  COMMAND cat ${LOGIN_LOADER_SOURCES} > ${DIR_APP}/login_loader.js
+  DEPENDS ${LOGIN_LOADER_SOURCES}
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+)
+add_dependencies(login_loader_js login_loader_theme login_js wr_js static_dir)
+
+# build login theme
+add_custom_target(login_theme ALL
+  COMMAND sassc -I ${SRC_THEME} -I ${BASE_THEME} ${SRC_THEME}/login/main.scss ${DIR_THEME}/login.css
+)
+add_dependencies(login_theme static_dir)
+
+# build login_js
+add_custom_target(login_js ALL
+  COMMAND cat ${LOGIN_SOURCES} > ${DIR_APP}/login.js
+  DEPENDS ${LOGIN_SOURCES}
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+)
+add_dependencies(login_js static_dir)
+
+# build admin theme
+add_custom_target(admin_theme ALL
+  COMMAND sassc -I ${SRC_THEME} -I ${BASE_THEME} ${SRC_THEME}/admin/main.scss ${PROJECT_BINARY_DIR}/admin.css
+  COMMAND ${IMAGE64} ${DIR_THEME}/admin.css ${PROJECT_BINARY_DIR}/admin.css ${SRC_THEME}
+)
+add_dependencies(admin_theme static_dir)
+
+# TODO: build admin.js
+add_custom_target(admin_js ALL
+  COMMAND cat ${ADMIN_SOURCES} > ${DIR_APP}/admin.js
+  DEPENDS ${ADMIN_SOURCES}
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+)
+add_dependencies(admin_js static_dir)
+#COMMAND ${CMAKE_COMMAND} -E copy ${DIR_APP}/static/admin.js
+
+set(SRC_FAVICON ${SRC_THEME}/img/favicon.ico)
+
+add_custom_target(favicon ALL
+  COMMAND ${CMAKE_COMMAND} -E copy ${SRC_FAVICON} ${DIR_STATIC}/favicon.ico
+  DEPENDS ${SRC_FAVICON}
+)
+
+set(SRC_ROBOTS ${PROJECT_SOURCE_DIR}/robots.txt)
+
+add_custom_target(robots ALL
+  COMMAND ${CMAKE_COMMAND} -E copy ${SRC_ROBOTS} ${DIR_STATIC}/robots.txt
+  DEPENDS ${SRC_ROBOTS}
+)

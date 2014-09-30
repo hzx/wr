@@ -1,0 +1,33 @@
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+button,
+input,
+select,
+textarea {
+    font-family: sans-serif;
+}
+
+img {
+    border: 0; /* 1 */
+    -ms-interpolation-mode: bicubic; /* 2 */
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+input {
+  outline-style: none;
+  margin: 0;
+  padding: 0;
+}

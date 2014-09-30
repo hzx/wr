@@ -1,0 +1,2 @@
+
+AnimationTest = TestCase("AnimationTest");

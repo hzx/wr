@@ -1,0 +1,2 @@
+
+StyleTest = TestCase("StyleTest");
