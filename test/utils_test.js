@@ -13,3 +13,9 @@ UtilsTest.prototype.testStringStartsWith = function() {
   assertTrue(wr.stringStartsWith("стрекоза", "стр"));
   assertFalse(wr.stringStartsWith("Стрекоза", "стр"));
 };
+
+
+UtilsTest.prototype.testIsEmpty = function() {
+  assertTrue(wr.isEmpty({}));
+  assertFalse(wr.isEmpty({"foo": "test"}));
+};
