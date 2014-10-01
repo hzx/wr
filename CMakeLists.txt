@@ -19,6 +19,7 @@ set(sources
   src/Logger.js
   src/DragDrop.js
   src/net.js
+  src/World.js
   src/RouterHelper.js
   src/Router.js
   src/App.js
