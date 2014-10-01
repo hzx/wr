@@ -18,3 +18,18 @@ wr.equalArrays = function(a, b) {
   }
   return false;
 };
+
+
+wr.stringStartsWith = function(text, part) {
+  if (part.length > text.length) {
+    return false;
+  }
+
+  for (var i = 0, length = part.length; i < length; ++i) {
+    if (part.charAt(i) !== text.charAt(i)) {
+      return false;
+    }
+  }
+
+  return true;
+};

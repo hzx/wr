@@ -120,8 +120,8 @@ wr.easingEaseInOut = function(progress) {
 
 
 wr.easingBounceIn = function(p) {
-  var pow2,
-    bounce = 4;
+  var pow2;
+  var bounce = 4;
 
   while ( p < ( ( pow2 = Math.pow( 2, --bounce ) ) - 1 ) / 11 ) {}
   return 1 / Math.pow( 4, 3 - bounce ) - 7.5625 * Math.pow( ( pow2 * 3 - 2 ) / 22 - p, 2 );

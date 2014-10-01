@@ -45,3 +45,6 @@ wr.init = function() {
     wr.initQueue_[i]();
   }
 };
+
+
+wr.dummy = function() {};

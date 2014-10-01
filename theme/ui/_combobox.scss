@@ -1,0 +1,64 @@
+@import "css3";
+
+
+.ui_combobox {
+  position: relative;
+  &.expand .ui_combobox_value {
+    background-image: url(img/common/arrow_back.png);
+  }
+}
+
+
+.ui_combobox_value {
+  font-size: 16px;
+  padding: 4px 24px 4px 8px;
+  background: url(img/common/arrow.png) no-repeat right 50% $bg_color;
+  // background-color: $bg_color;
+  border: 1px solid $border_color;
+  @include border-radius(2px);
+  cursor: pointer;
+}
+
+
+.ui_combobox_dropdown {
+  position: absolute;
+  left: 0;
+  background-color: $bg_color2;
+}
+
+
+.ui_combobox_default, .ui_combobox_option {
+  font-size: 14px;
+  font-family: $sans_serif_font_family;
+  padding: 4px 8px;
+  border-bottom: 1px solid $border_color;
+  cursor: pointer;
+  &:hover {
+    background-color: #f7f7f7;
+  }
+}
+
+.ui_combobox_options {
+}
+
+.ui_combobox_edit {
+  margin: 2px;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-family: $sans_serif_font_family;
+  background-color: $bg_color;
+  border: 1px solid $border_color;
+  @include border-radius(2px);
+  &.focus {
+    border-color: $focus_border_color;
+  }
+}
+
+.ui_combobox_input {
+  font-size: inherit;
+  font-family: inherit;
+  background-color: transparent;
+  border-style: none;
+  width: 100%;
+  height: 100%;
+}

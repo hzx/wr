@@ -74,6 +74,17 @@ ui.Radiolist.prototype.addOption = function(id, text) {
 };
 
 
+ui.Radiolist.prototype.updateText = function(id, text) {
+  var option = this.options.firstChild;
+  while (option) {
+    if (option.optionId === id) {
+      wr.setText(option, text);
+    }
+    child = child.nextSibling;
+  }
+};
+
+
 ui.Radiolist.prototype.removeOption = function(id) {
   var option = this.options.firstChild;
   while (option) {
@@ -105,9 +116,7 @@ ui.Radiolist.prototype.selectOption = function(element) {
 
   wr.addClass(element, "select");
 
-  if (old !== element.optionId) {
-    this.eventChange.notify(old, element.optionId);
-  }
+  this.eventChange.notify(old, element.optionId);
 };
 
 

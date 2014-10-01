@@ -7,7 +7,7 @@
 }
 
 @mixin box-shadow($x, $y, $blur, $color, $side) {
-  -webkit-box-shadow: $x $y $blur $color $side;
-  -moz-box-shadow: $x $y $blur $color $side;
-  box-shadow: $x $y $blur $color $side;
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
 }

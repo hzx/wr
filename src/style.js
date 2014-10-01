@@ -1,27 +1,27 @@
 
-wr.getStyle = function(elem, name) {
+wr.getStyle = function(element, name) {
 };
 
 wr.initQueue_.push(function() {
-  var element = document.body;
+  var foo = document.body;
 
   // not needed?! test benchmark this and other 2 methods
-  // wr.getStyle = function(elem, name) {
-  //   elem.style[name];
+  // wr.getStyle = function(element, name) {
+  //   element.style[name];
   // };
 
   // IE
-  if (element.currentStyle) {
-    wr.getStyle = function(elem, name) {
-      return elem.currentStyle[name];
+  if (foo.currentStyle) {
+    wr.getStyle = function(element, name) {
+      return element.currentStyle[name];
     };
     return;
   }
 
   // W3C
   if (document.defaultView && document.defaultView.getComputedStyle) {
-    wr.getStyle = function(elem, name) {
-      var s = document.defaultView.getComputedStyle(elem, "");
+    wr.getStyle = function(element, name) {
+      var s = document.defaultView.getComputedStyle(element, "");
       return s && s.getPropertyValue(name);
     };
     return;
@@ -29,100 +29,100 @@ wr.initQueue_.push(function() {
 });
 
 
-wr.setStyle = function(elem, name, value) {
-  elem.style[name] = value;
+wr.setStyle = function(element, name, value) {
+  element.style[name] = value;
 };
 
 
-// elem position relative page
-wr.pageX = function(elem) {
-  return elem.offsetParent ?
-    elem.offsetLeft + wr.pageX(elem.offsetParent) :
-    elem.offsetLeft;
+// element position relative page
+wr.pageX = function(element) {
+  return element.offsetParent ?
+    element.offsetLeft + wr.pageX(element.offsetParent) :
+    element.offsetLeft;
 };
 
 
-wr.pageY = function(elem) {
-  return elem.offsetParent ?
-    elem.offsetTop + wr.pageY(elem.offsetParent) :
-    elem.offsetTop;
+wr.pageY = function(element) {
+  return element.offsetParent ?
+    element.offsetTop + wr.pageY(element.offsetParent) :
+    element.offsetTop;
 };
 
 
-// elem x position relative parent
-wr.parentX = function(elem) {
+// element x position relative parent
+wr.parentX = function(element) {
   // if the offsetParent is the element parent, break early
-  return elem.parentNode == elem.offsetParent ?
-    elem.offsetLeft :
+  return element.parentNode == element.offsetParent ?
+    element.offsetLeft :
     // otherwise, we need to find the position relative to the entire
     // page for both elements, and find the difference;
-    wr.pageX(elem) - wr.pageX(elem.parentNode);
+    wr.pageX(element) - wr.pageX(element.parentNode);
 };
 
 
-wr.parentY = function(elem) {
-  return elem.parentNode == elem.offsetParent ?
-    elem.offsetTop :
-    wr.pageY(elem) - wr.pageY(elem.parentNode);
+wr.parentY = function(element) {
+  return element.parentNode == element.offsetParent ?
+    element.offsetTop :
+    wr.pageY(element) - wr.pageY(element.parentNode);
 };
 
 
-wr.posX = function(elem) {
-  return parseInt(wr.getStyle(elem, "left"));
+wr.posX = function(element) {
+  return parseInt(wr.getStyle(element, "left"));
 };
 
 
-wr.posY = function(elem) {
-  return parseInt(wr.getStyle(elem, "top"));
+wr.posY = function(element) {
+  return parseInt(wr.getStyle(element, "top"));
 };
 
 
-wr.setX = function(elem, pos) {
-  elem.style.left = pos + "px";
+wr.setX = function(element, pos) {
+  element.style.left = pos + "px";
 };
 
 
-wr.setY = function(elem, pos) {
-  elem.style.top = pos + "px";
+wr.setY = function(element, pos) {
+  element.style.top = pos + "px";
 };
 
 
-wr.addX = function(elem, pos) {
-  wr.setX(elem, wr.posX(elem) + pos);
+wr.addX = function(element, pos) {
+  wr.setX(element, wr.posX(element) + pos);
 };
 
 
-wr.addY = function(elem, pos) {
-  wr.setY(elem, wr.posY(elem) + pos);
+wr.addY = function(element, pos) {
+  wr.setY(element, wr.posY(element) + pos);
 };
 
 
-wr.getWidth = function(elem) {
-  return parseInt(wr.getStyle(elem, "width"));
+wr.getWidth = function(element) {
+  return parseInt(wr.getStyle(element, "width"));
 }
 
 
-wr.getHeight = function(elem) {
-  return parseInt(wr.getStyle(elem, "height"));
+wr.getHeight = function(element) {
+  return parseInt(wr.getStyle(element, "height"));
 };
 
 
-wr.hide = function(elem) {
-  var display = wr.getStyle(elem, "display");
+wr.hide = function(element) {
+  var display = wr.getStyle(element, "display");
 
-  if (display != "none") elem.oldDisplay = display;
+  if (display != "none") element.oldDisplay = display;
 
-  elem.style.display = "none";
+  element.style.display = "none";
 };
 
 
-wr.show = function(elem) {
-  elem.style.display = elem.oldDisplay || '';
+wr.show = function(element) {
+  element.style.display = element.oldDisplay || '';
 };
 
 
 // level 0-1.0
-wr.setOpacity = function(elem, level) {
+wr.setOpacity = function(element, level) {
 };
 
 wr.initQueue_.push(function() {
@@ -130,73 +130,73 @@ wr.initQueue_.push(function() {
 
   // IE
   if (element.filters) {
-    wr.setOpacity = function(elem, level) {
-      elem.style.filter = "alpha(opacity=" + Math.floor(level * 100.0) + ")";
+    wr.setOpacity = function(element, level) {
+      element.style.filter = "alpha(opacity=" + Math.floor(level * 100.0) + ")";
     };
     return;
   }
 
   // W3C
-  wr.setOpacity = function(elem, level) {
-    elem.style.opacity = level;
+  wr.setOpacity = function(element, level) {
+    element.style.opacity = level;
   };
 });
 
 
-wr.resetCss = function(elem, props) {
+wr.resetCss = function(element, props) {
   var bak = {};
 
   for (var i in props) {
-    bak[i] = elem.style[i];
-    elem.style[i] = props[i];
+    bak[i] = element.style[i];
+    element.style[i] = props[i];
   }
 
   return bak;
 };
 
 
-wr.setCss = function(elem, props) {
+wr.setCss = function(element, props) {
   for (var i in props) {
-    elem.style[i] = props[i];
+    element.style[i] = props[i];
   }
 };
 
 
 // Find the full, possible, width of an element (not the actual,
 // current, width)
-wr.fullWidth = function(elem) {
-  if (wr.getStyle(elem, "display") != "none") {
-    return elem.offsetWidth || wr.getWidth(elem);
+wr.fullWidth = function(element) {
+  if (wr.getStyle(element, "display") != "none") {
+    return element.offsetWidth || wr.getWidth(element);
   }
 
-  var bak = wr.resetCss(elem, {
+  var bak = wr.resetCss(element, {
     "display": "",
     "visibility": "hidden",
     "position": "absolute"
   });
 
-  var width = elem.clientWidth || wr.getWidth(elem);
+  var width = element.clientWidth || wr.getWidth(element);
 
-  wr.setCss(elem, bak);
+  wr.setCss(element, bak);
 
   return width;
 };
 
 
-wr.fullHeight = function(elem) {
-  if (wr.getStyle(elem, "display") != "none") {
-    return elem.offsetHeight || wr.getHeight(elem);
+wr.fullHeight = function(element) {
+  if (wr.getStyle(element, "display") != "none") {
+    return element.offsetHeight || wr.getHeight(element);
   }
 
-  var bak = wr.resetCss(elem, {
+  var bak = wr.resetCss(element, {
     "display": "",
     "visibility": "hidden",
     "position": "absolute"
   });
 
-  var height = elem.clientHeight || wr.getHeight(elem);
+  var height = element.clientHeight || wr.getHeight(element);
 
-  wr.setCss(elem, bak);
+  wr.setCss(element, bak);
 
   return height;
 };
@@ -243,42 +243,42 @@ wr.initQueue_.push(function() {
 });
 
 
-wr.pageHeight = function(elem) {
-  return elem.scrollHeight;
+wr.pageHeight = function(element) {
+  return element.scrollHeight;
 };
 
-wr.pageWidth = function(elem) {
-  return elem.scrollWidth;
+wr.pageWidth = function(element) {
+  return element.scrollWidth;
 };
 
 
-// A function for determining how far horizontally the browser (elem)
+// A function for determining how far horizontally the browser (element)
 // is scrolled;
-wr.scrollX = function(elem) {
-  // return elem.scrollLeft;
-  return elem.pageXOffset || elem.scrollLeft;
+wr.scrollX = function(element) {
+  // return element.scrollLeft;
+  return element.pageXOffset || element.scrollLeft;
 };
 
-wr.scrollY = function(elem) {
-  // return elem.scrollTop;
-  return elem.pageYOffset || elem.scrollTop;
+wr.scrollY = function(element) {
+  // return element.scrollTop;
+  return element.pageYOffset || element.scrollTop;
 };
 
 // wr.initQueue_.push(function() {
-//   wr.scrollX = wr.global.addEventListener ? function(elem) { // W3C
-//     return elem.scrollLeft;
-//   } : function(elem) { // IE
-//     return elem.pageXOffset;
+//   wr.scrollX = wr.global.addEventListener ? function(element) { // W3C
+//     return element.scrollLeft;
+//   } : function(element) { // IE
+//     return element.pageXOffset;
 //   };
 
-//   wr.scrollY = wr.global.addEventListener ? function(elem) { // W3C
-//     return elem.scrollTop;
-//   } : function(elem) { // IE
-//     return elem.pageYOffset;
+//   wr.scrollY = wr.global.addEventListener ? function(element) { // W3C
+//     return element.scrollTop;
+//   } : function(element) { // IE
+//     return element.pageYOffset;
 //   };
 // });
 
 
-wr.scrollTo = function(elem, x, y) {
-  elem.scrollTo(x, y);
+wr.scrollTo = function(element, x, y) {
+  element.scrollTo(x, y);
 };

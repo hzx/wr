@@ -21,21 +21,49 @@ wr.createElementText = function(name, text) {
   return element;
 };
 
-wr.setText = (function() {
-  return wr.global.addEventListener ? function(node, text) {
-    node.textContent = text;
-  } : function(node, text) {
-    node.nodeValue = text;
-  };
-})();
+wr.setText = function() {
+  // return wr.global.addEventListener ? function(node, text) {
+  //   node.textContent = text;
+  // } : function(node, text) {
+  //   node.nodeValue = text;
+  // };
+};
+
+wr.initQueue_.push(function() {
+  if ("textContent" in document.body) {
+    wr.setText = function(element, text) {
+      element.textContent = text;
+    };
+
+    wr.getText = function(element) {
+      return element.textContent;
+    };
+  } else {
+    wr.setText = function(element, text) {
+      if (element.firstChild) {
+        element.firstChild.nodeValue = text;
+      } else {
+        wr.appendChild(element, wr.createText(text));
+      }
+    };
+
+    wr.getText = function(element) {
+      if (element.firstChild) {
+        return element.firstChild.nodeValue;
+      } else {
+        return "";
+      }
+    };
+  }
+});
 
 
 wr.getText = (function() {
-  return wr.global.addEventListener ? function(node) {
-    return node.textContent;
-  } : function(node) {
-    return node.nodeValue;
-  };
+  // return wr.global.addEventListener ? function(node) {
+  //   return node.textContent;
+  // } : function(node) {
+  //   return node.nodeValue;
+  // };
 })();
 
 
