@@ -1,5 +1,7 @@
 
 ui.Edit = function() {
+  wr.construct(ui.Edit, this);
+
   this.value = "";
   this.userClass = "";
   this.validateValue = null;
@@ -7,10 +9,11 @@ ui.Edit = function() {
 
   this.eventChange = new wr.Event();
 
-  this.node = null;
   this.input = null;
-  this.events = [];
 };
+
+
+wr.inherit(ui.Edit, wr.View);
 
 
 ui.Edit.prototype.create = function() {
@@ -33,12 +36,6 @@ ui.Edit.prototype.create = function() {
     [this.input, "focus", wr.bind(this, this.onInputFocus)],
     [this.input, "blur", wr.bind(this, this.onInputBlur)]
   ];
-};
-
-
-ui.Edit.prototype.destroy = function() {
-  delete this.node;
-  this.node = null;
 };
 
 

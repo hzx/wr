@@ -1,16 +1,20 @@
 
 ui.Radiolist = function() {
+  wr.construct(ui.Radiolist, this);
+
   // for user, init before create
   this.userClass = "";
   this.textDefault = "";
 
   this.isEnter = false;
-  this.events = [];
   this.eventChange = new wr.Event();
   this.last = null;
 
   this.meOptionClick = wr.bind(this, this.onOptionClick);
 };
+
+
+wr.inherit(ui.Radiolist, wr.View);
 
 
 ui.Radiolist.prototype.create = function() {
@@ -29,12 +33,6 @@ ui.Radiolist.prototype.create = function() {
   this.events = [
     [this.optionDefault, "click", wr.bind(this, this.onDefaultClick)]
   ];
-};
-
-
-ui.Radiolist.prototype.destroy = function() {
-  delete this.node;
-  this.node = null;
 };
 
 

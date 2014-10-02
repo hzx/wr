@@ -1,5 +1,7 @@
 
 ui.Combobox = function() {
+  wr.construct(ui.Combobox, this);
+
   // for user, init before create
   this.userClass = "";
   this.textDefault = "";
@@ -10,11 +12,13 @@ ui.Combobox = function() {
   this.isEnter = false;
   this.eventChange = new wr.Event();
   this.last = null;
-  this.events = [];
   this.storeOptions = [];
 
   this.meOptionClick = wr.bind(this, this.onOptionClick);
 };
+
+
+wr.inherit(ui.Combobox, wr.View);
 
 
 ui.Combobox.prototype.create = function() {
@@ -55,12 +59,6 @@ ui.Combobox.prototype.create = function() {
     [this.input, "blur", wr.bind(this, this.onInputBlur)],
     [this.optionDefault, "click", wr.bind(this, this.onDefaultClick)]
   ];
-};
-
-
-ui.Combobox.prototype.destroy = function() {
-  delete this.node;
-  this.node = null;
 };
 
 

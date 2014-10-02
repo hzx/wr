@@ -1,8 +1,12 @@
 
 ui.Hint = function(userClass) {
+  wr.construct(ui.Hint, this);
+
   this.userClass = userClass;
-  this.node = null;
 };
+
+
+wr.inherit(ui.Hint, wr.View);
 
 
 ui.Hint.prototype.create = function() {
@@ -15,12 +19,6 @@ ui.Hint.prototype.create = function() {
   ]);
 
   wr.addClass(this.node, this.userClass);
-};
-
-
-ui.Hint.prototype.destroy = function() {
-  delete this.node;
-  this.node = null;
 };
 
 
