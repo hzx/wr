@@ -174,7 +174,12 @@ wr.post = function(url, data, xsrf, success, fail) {
 };
 
 
-wr.postFile = function(url, data, xsrf, success, fail) {
+wr.postFiles = function(url, files, xsrf, success, fail) {
+  var data = new FormData();
+  for (var i = 0, length = files.length; i < length; ++i) {
+    data.append("file", files[i]);
+  }
+
   var params = {
     method: "POST",
     headers: {
