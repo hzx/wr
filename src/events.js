@@ -41,22 +41,19 @@ wr.unlisten = (function(node, name, handler) {
 })();
 
 
+// (element) - params
 wr.click = wr.dummy;
 
-
 wr.initQueue_.push(function() {
-  var foo = document.body;
-
   // firefox
-  if (foo.click) {
+  if (document.body.click) {
     wr.click = function(element) {
       element.click();
     };
     return;
   }
 
-  // W3C 
-  if(document.createEvent) {
+  if(document.createEvent) { // W3C
     wr.click = function(element) {
       event = document.createEvent("MouseEvents");
       event.initMouseEvent("click", true, true, wr.global,

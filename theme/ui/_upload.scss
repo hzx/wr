@@ -1,0 +1,11 @@
+
+.ui_upload {
+  position: relative;
+  overflow: hidden;
+}
+
+.ui_upload_input {
+  position: absolute;
+  left: -10000px;
+  top: 0;
+}
