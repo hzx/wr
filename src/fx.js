@@ -1,4 +1,7 @@
 
+wr.fastTime = 200;
+wr.slowTime = 1000;
+
 // smooth show with size
 wr.slideIn = function(element, time, callback) {
   var height = wr.fullHeight(element);
