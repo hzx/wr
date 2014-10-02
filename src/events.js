@@ -24,7 +24,7 @@ wr.listen = (function(node, name, handler) {
     if (!!handler.proxy === false) {
       handler.proxy = function(e) {
         // call handler W3C way - with event parameter
-        return handler(wr.fixEventIE_(e || window.event));
+        return handler(wr.fixEventIE_(e || wr.global.event));
       };
     }
     node.attachEvent("on" + name, handler.proxy);

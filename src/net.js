@@ -3,6 +3,8 @@ wr.netHasher = new wr.Hasher();
 wr.eventConnectionError = new wr.Event();
 wr.eventClientError = new wr.Event();
 wr.eventServerError = new wr.Event();
+wr.isFormData = !! wr.global.FormData;
+
 
 wr.createXhr = (function() {
   var methods = [
@@ -180,7 +182,7 @@ wr.postFile = function(url, data, xsrf, success, fail) {
       "X-Xsrftoken": xsrf
     },
     url: url,
-    data: wr.encodeData(data),
+    data: data,
     success: success,
     fail: fail
   };

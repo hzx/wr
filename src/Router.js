@@ -24,7 +24,7 @@ wr.Router.prototype.exit = function() {
   }
 };
 
-// take slugs from window location, call it to begin route app
+// take slugs from global location, call it to begin route app
 wr.Router.prototype.init = function() {
   var slugs = wr.RouterHelper.getSlugs();
   this.setSlugs(slugs);

@@ -10,13 +10,13 @@ wr.requestAnimationFrame = (function() {
     function(callback) {
       var currTime = (new Date()).getTime();
       var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-      var id = window.setTimeout(function() {
+      var id = wr.global.setTimeout(function() {
         callback(currTime + timeToCall);
       }, timeToCall);
       lastTime = currTime + timeToCall;
       return id;
 
-      // var id = window.setTimeout(callback, 1000 / 10);
+      // var id = wr.global.setTimeout(callback, 1000 / 10);
       // return id;
     };
 })();
