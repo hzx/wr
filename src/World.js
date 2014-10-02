@@ -1,9 +1,9 @@
 
 wr.World = function() {
   this.xsrf = "";
-  this.eventConnectionError = new wr.Error();
-  this.eventClientError = new wr.Error();
-  this.eventServerError = new wr.Error();
+  this.eventConnectionError = new wr.Event();
+  this.eventClientError = new wr.Event();
+  this.eventServerError = new wr.Event();
 };
 
 
