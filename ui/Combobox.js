@@ -212,7 +212,7 @@ ui.Combobox.prototype.selectOption = function(element) {
 ui.Combobox.prototype.collapse = function() {
   this.isExpand = false;
   wr.removeClass(this.node, "expand");
-  wr.slideFadeOut(this.dropdown, 300, wr.dummy);
+  wr.slideFadeOut(this.dropdown, ui.fastTime, wr.dummy);
 };
 
 
@@ -220,7 +220,7 @@ ui.Combobox.prototype.expand = function() {
   this.isExpand = true;
   wr.addClass(this.node, "expand");
   wr.setStyle(this.dropdown, "height", "auto");
-  wr.slideFadeIn(this.dropdown, 300, wr.dummy);
+  wr.slideFadeIn(this.dropdown, ui.fastTime, wr.dummy);
   this.focusEdit();
 };
 
