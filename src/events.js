@@ -39,3 +39,33 @@ wr.unlisten = (function(node, name, handler) {
     node.detachEvent("on" + name, handler.proxy);
   };
 })();
+
+
+wr.click = wr.dummy;
+
+
+wr.initQueue_.push(function() {
+  var foo = document.body;
+
+  // firefox
+  if (foo.click) {
+    wr.click = function(element) {
+      element.click();
+    };
+    return;
+  }
+
+  // W3C 
+  if(document.createEvent) {
+    wr.click = function(element) {
+      event = document.createEvent("MouseEvents");
+      event.initMouseEvent("click", true, true, wr.global,
+        0, 0, 0, 0, 0, false, false, false, false, 0, null);
+      element.dispatchEvent(event);
+    };
+  } else { // IE
+    wr.click = function(element) {
+      element.fireEvent("onclick", element.ownerDocument.createEventObject());
+    }
+  }
+});
