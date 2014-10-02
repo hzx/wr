@@ -61,5 +61,5 @@ ui.Upload.prototype.onClick = function(e) {
 
 ui.Upload.prototype.onInputChange = function(e) {
   e.stopPropagation();
-  this.eventChange.notify(e);
+  this.eventChange.notify2(this, e.target.files);
 };
