@@ -12,6 +12,12 @@ wr.inherit = function(child, base) {
 };
 
 
+// Call base class constructor, use in child class constructor
+wr.construct = function(child, me) {
+  child.base.constructor.call(me);
+};
+
+
 wr.augment = function(dest, src) {
   for (var i in src) {
     dest[i] = src[i];
