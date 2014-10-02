@@ -1,4 +1,9 @@
 
+wr.netHasher = new wr.Hasher();
+wr.eventConnectionError = new wr.Event();
+wr.eventClientError = new wr.Event();
+wr.eventServerError = new wr.Event();
+
 wr.createXhr = (function() {
   var methods = [
     function() { return new XMLHttpRequest(); },
@@ -21,7 +26,29 @@ wr.createXhr = (function() {
 })();
 
 
-wr.netHasher = new wr.Hasher();
+wr.notifyFail = function(status, response) {
+  if (status === 0) {
+    wr.eventConnectionError.notify("Ошибка соединения, проверьте подключение к интернету.");
+    return;
+  }
+
+  var message;
+
+  try {
+    message = response["message"];
+  } catch (e) {
+    message = "Ошибка " + status;
+  }
+
+  if (status >= 400 && status < 500) {
+    wr.eventClientError.notify(message);
+    return;
+  }
+
+  if (status >= 500 && status < 600) {
+    wr.eventServerError.notify(message);
+  }
+};
 
 
 wr.saltUrl = function(url) {
@@ -98,6 +125,7 @@ wr.ajax = function(params) {
       if (status === 200) {
         params.success(response);
       } else {
+        wr.notifyFail(status, response);
         params.fail(status, response);
       }
     }
