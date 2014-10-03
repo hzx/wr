@@ -4,10 +4,32 @@ wr.Collection = function() {
   this.objs = {};
   this.ids = [];
 
+  this.eventReset = new wr.Event();
   this.eventInsert = new wr.Event();
   this.eventAppend = new wr.Event();
   this.eventRemove = new wr.Event();
   this.eventMove = new wr.Event();
+};
+
+
+wr.Collection.prototype.reset = function(objs) {
+  this.objs = {}
+  this.ids = [];
+  var obj;
+
+  for (var i = 0, length = objs.length; i < length; ++i) {
+    obj = objs[i];
+
+    // skip doubles
+    if (obj.id in this.objs) {
+      continue;
+    }
+
+    this.objs[obj.id] = obj;
+    this.ids.push(obj.id);
+  }
+
+  this.eventReset.notify(this);
 };
 
 
@@ -110,7 +132,7 @@ wr.Collection.prototype.move = function(id, beforeId) {
     // copy moved element
     ids.push(this.ids[im]);
     // copy elements beforeId and after
-    for (i = ib, length = this.ids.length; ++i) {
+    for (i = ib, length = this.ids.length; i < length; ++i) {
       // but except moved element
       if (i !== im) {
         ids.push(this.ids[i]);
@@ -121,6 +143,14 @@ wr.Collection.prototype.move = function(id, beforeId) {
     this.ids = ids;
 
     this.eventMove.notify2(id, beforeId);
+  }
+};
+
+
+// dont add/remove collection objects in fn!!!
+wr.Collection.prototype.forEach = function(fn) {
+  for (var i = 0, length = this.ids.length; i < length; ++i) {
+    fn(this.objs[this.ids[i]]);
   }
 };
 

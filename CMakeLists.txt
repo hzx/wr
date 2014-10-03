@@ -17,6 +17,7 @@ set(sources
   src/fx.js
   src/Event.js
   src/Logger.js
+  src/Collection.js
   src/DragDrop.js
   src/net.js
   src/World.js
