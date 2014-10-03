@@ -19,6 +19,7 @@ wr.inherit(ui.Radiolist, wr.View);
 
 ui.Radiolist.prototype.create = function() {
   this.optionDefault = wr.DIV_ct("ui_radiolist_default", this.textDefault);
+  this.optionDefault.optionId = null;
   this.options = wr.DIV_c("ui_radiolist_options");
   
   this.node = wr.DIV_cc("ui_radiolist", [
@@ -114,7 +115,7 @@ ui.Radiolist.prototype.selectOption = function(element) {
 
   wr.addClass(element, "select");
 
-  this.eventChange.notify(old, element.optionId);
+  this.eventChange.notify2(old, element.optionId);
 };
 
 
