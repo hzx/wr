@@ -41,6 +41,20 @@ wr.DIV_ct = function(className, text) {
 };
 
 
+wr.SPAN_c = function(className) {
+  var node = wr.createElement(wr.SPAN);
+  wr.addClass(node, className);
+  return node;
+};
+
+
+wr.SPAN_ct = function(className, text) {
+  var node = wr.SPAN_c(className);
+  wr.appendChild(node, wr.createText(text));
+  return node;
+};
+
+
 wr.INPUT_c = function(className) {
   var node = wr.createElement("input");
   wr.addClass(node, className);

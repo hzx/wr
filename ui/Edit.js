@@ -4,12 +4,10 @@ ui.Edit = function() {
 
   this.value = "";
   this.userClass = "";
-  this.validateValue = null;
+  this.validateValue = wr.dummyTrue;
   this.type = "text";
 
   this.eventChange = new wr.Event();
-
-  this.input = null;
 };
 
 
@@ -64,9 +62,29 @@ ui.Edit.prototype.setFocus = function(isFocus) {
 };
 
 
+ui.Edit.prototype.setValue = function(value) {
+  if (value === this.value) {
+    return;
+  }
+
+  var old = this.value;
+
+  this.value = value;
+  this.input.value = value;
+
+  this.eventChange.notify2(old, value);
+};
+
+
 ui.Edit.prototype.clear = function() {
+  var old = this.value;
+
   this.value = "";
   this.input.value = "";
+
+  if (old !== this.value) {
+    this.eventChange.notify2(old, this.value);
+  }
 };
 
 

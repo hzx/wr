@@ -3,42 +3,48 @@ project(wr)
 
 set(sources
   json3.js
-  src/base.js
-  src/Hasher.js
-  src/utils.js
-  src/datetime.js
-  src/validate.js
-  src/events.js
-  src/dom.js
-  src/dom_utils.js
-  src/style.js
-  src/splines.js
-  src/animation.js
-  src/fx.js
-  src/Event.js
-  src/Logger.js
-  src/Collection.js
-  src/DragDrop.js
-  src/net.js
-  src/World.js
-  src/View.js
-  src/RouterHelper.js
-  src/Router.js
-  src/App.js
-  src/AppLoader.js
+  wr/base.js
+  wr/Hasher.js
+  wr/utils.js
+  wr/datetime.js
+  wr/validate.js
+  wr/events.js
+  wr/dom.js
+  wr/dom_utils.js
+  wr/style.js
+  wr/splines.js
+  wr/animation.js
+  wr/fx.js
+  wr/Event.js
+  wr/Logger.js
+  wr/Collection.js
+  wr/DragDrop.js
+  wr/net.js
+  wr/World.js
+  wr/View.js
+  wr/RouterHelper.js
+  wr/Router.js
+  wr/App.js
+  wr/AppLoader.js
 )
 
 set(ui_sources
   ui/base.js
+  ui/Upload.js
   ui/Hint.js
   ui/Edit.js
   ui/Textarea.js
   ui/Image.js
+  ui/Gallery.js
+  ui/GalleryEdit.js
   ui/Slider.js
   ui/Combobox.js
   ui/Checkbox.js
   ui/Checklist.js
   ui/Radiolist.js
+  ui/Calendar.js
+  ui/Progressbar.js
+  ui/Scrollbar.js
 )
 
 add_custom_target(${PROJECT_NAME} ALL DEPENDS ${sources}

@@ -4,6 +4,7 @@ ui.Radiolist = function() {
 
   // for user, init before create
   this.userClass = "";
+  this.idDefault = null;
   this.textDefault = "";
 
   this.isEnter = false;
@@ -19,7 +20,8 @@ wr.inherit(ui.Radiolist, wr.View);
 
 ui.Radiolist.prototype.create = function() {
   this.optionDefault = wr.DIV_ct("ui_radiolist_default", this.textDefault);
-  this.optionDefault.optionId = null;
+  this.optionDefault.optionId = this.idDefault;
+
   this.options = wr.DIV_c("ui_radiolist_options");
   
   this.node = wr.DIV_cc("ui_radiolist", [
@@ -61,7 +63,7 @@ ui.Radiolist.prototype.exit = function() {
 };
 
 
-ui.Radiolist.prototype.addOption = function(id, text) {
+ui.Radiolist.prototype.add = function(id, text) {
   var option = wr.DIV_ct("ui_radiolist_option", text);
   option.optionId = id;
 
@@ -84,7 +86,7 @@ ui.Radiolist.prototype.updateText = function(id, text) {
 };
 
 
-ui.Radiolist.prototype.removeOption = function(id) {
+ui.Radiolist.prototype.remove = function(id) {
   var option = this.options.firstChild;
   while (option) {
     if (option.optionId === id) {

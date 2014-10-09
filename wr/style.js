@@ -98,12 +98,12 @@ wr.addY = function(element, pos) {
 
 
 wr.getWidth = function(element) {
-  return parseInt(wr.getStyle(element, "width"));
+  return parseInt(wr.getStyle(element, "width")) || 0;
 }
 
 
 wr.getHeight = function(element) {
-  return parseInt(wr.getStyle(element, "height"));
+  return parseInt(wr.getStyle(element, "height")) || 0;
 };
 
 

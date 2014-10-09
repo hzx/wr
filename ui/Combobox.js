@@ -5,6 +5,7 @@ ui.Combobox = function() {
   // for user, init before create
   this.userClass = "";
   this.textDefault = "";
+  this.idDefault = null;
 
   this.isExpand = false;
   this.editValue = "";
@@ -31,6 +32,7 @@ ui.Combobox.prototype.create = function() {
   ]);
 
   this.optionDefault = wr.DIV_ct("ui_combobox_default", this.textDefault);
+  this.optionDefault.optionId = this.idDefault;
 
   this.options = wr.DIV_c("ui_combobox_options");
 
@@ -101,7 +103,7 @@ ui.Combobox.prototype.reset = function() {
 };
 
 
-ui.Combobox.prototype.addOption = function(id, text) {
+ui.Combobox.prototype.add = function(id, text) {
   this.storeOptions.push([id, text]);
   this.addOptionElement(id, text);
 }
@@ -119,7 +121,7 @@ ui.Combobox.prototype.addOptionElement = function(id, text) {
 };
 
 
-ui.Combobox.prototype.removeOption = function(id, text) {
+ui.Combobox.prototype.remove = function(id) {
   var option = this.options.firstChild;
   while (option) {
     if (option.optionId === id) {
@@ -143,7 +145,7 @@ ui.Combobox.prototype.removeOption = function(id, text) {
 };
 
 
-ui.Combobox.prototype.emptyOptions = function() {
+ui.Combobox.prototype.empty = function() {
   var child = this.options.firstChild;
   var next;
   while (child) {
@@ -156,6 +158,18 @@ ui.Combobox.prototype.emptyOptions = function() {
     wr.removeChild(this.options, child);
 
     child = next;
+  }
+};
+
+
+ui.Combobox.prototype.select = function(id) {
+  var child = this.options.firstChild;
+  while (child) {
+    if (child.optionId === id) {
+      this.selectOption(child);
+      break;
+    }
+    child = child.nextSibling;
   }
 };
 
@@ -203,7 +217,7 @@ ui.Combobox.prototype.selectOption = function(element) {
 
   wr.setText(this.value, wr.getText(this.last));
 
-  this.eventChange.notify(old, element.optionId);
+  this.eventChange.notify2(old, element.optionId);
 };
 
 
@@ -226,7 +240,7 @@ ui.Combobox.prototype.expand = function() {
 ui.Combobox.prototype.filter = function() {
   var value = this.editValue.toLowerCase();
 
-  this.emptyOptions();
+  this.empty();
 
   if (value.length === 0) {
     this.fillOptions(this.storeOptions);

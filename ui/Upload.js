@@ -4,7 +4,10 @@ ui.Upload = function() {
 
   // user data to fill
   this.userClass = "";
+  this.userText = "";
   this.multiple = false;
+
+  this.isOpen = false;
 
   this.eventChange = new wr.Event();
 };
@@ -13,12 +16,15 @@ ui.Upload = function() {
 wr.inherit(ui.Upload, wr.View);
 
 
-ui.Upload.create = function() {
+ui.Upload.prototype.create = function() {
   this.input = wr.INPUT_c("ui_upload_input");
   this.input.type = "file";
   this.input.multiple = this.multiple;
 
+  this.text = wr.SPAN_ct("ui_upload_text", this.userText);
+
   this.node = wr.DIV_cc("ui_upload", [
+    this.text,
     this.input
   ]);
 
@@ -26,7 +32,9 @@ ui.Upload.create = function() {
 
   this.events = [
     [this.node, "click", wr.bind(this, this.onClick)],
-    [this.input, "change", wr.bind(this, this.onInputChange)]
+    [this.input, "change", wr.bind(this, this.onInputChange)],
+    [this.input, "focus", wr.bind(this, this.onInputFocus)],
+    [this.input, "blur", wr.bind(this, this.onInputBlur)]
   ];
 };
 
@@ -54,12 +62,35 @@ ui.Upload.prototype.reset = function() {
 };
 
 
+ui.Upload.prototype.setText = function(text) {
+  wr.setText(this.text, text);
+};
+
+
 ui.Upload.prototype.onClick = function(e) {
+  if(this.isOpen) return;
+  this.isOpen = true;
   wr.click(this.input);
+  this.isOpen = false;
 };
 
 
 ui.Upload.prototype.onInputChange = function(e) {
   e.stopPropagation();
-  this.eventChange.notify2(this, e.target.files);
+
+  var files = e.target.files;
+
+  if (files && files.length > 0) {
+    this.eventChange.notify(files);
+  }
+};
+
+
+ui.Upload.prototype.onInputFocus = function(e) {
+  // wr.log("Upload.focus");
+};
+
+
+ui.Upload.prototype.onInputBlur = function(e) {
+  // wr.log("Upload blur");
 };

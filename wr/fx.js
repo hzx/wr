@@ -1,5 +1,6 @@
 
 wr.fastTime = 200;
+wr.normalTime = 400;
 wr.slowTime = 1000;
 
 // smooth show with size

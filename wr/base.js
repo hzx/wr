@@ -54,3 +54,11 @@ wr.init = function() {
 
 
 wr.dummy = function() {};
+
+wr.dummyTrue = function() {
+  return true;
+};
+
+wr.dummyFalse = function() {
+  return false;
+};

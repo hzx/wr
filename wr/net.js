@@ -91,13 +91,16 @@ wr.Xhr.prototype.parseResponse = function() {
 wr.Xhr.prototype.onreadystatechange = function() {
 };
 
+wr.onreadystatechange = function(e) {
+};
+
 
 // params - {method, headers, url, data, success, fail}
 wr.ajax = function(params) {
   var xhr = wr.createXhr();
 
   xhr.onreadystatechange = function() {
-  // var onReadyStateChange = function() {
+  // wr.listen(xhr, "readystatechange", function(e) {
     if (xhr.readyState === 4) {
       var response;
       var status = xhr.status;
@@ -132,6 +135,7 @@ wr.ajax = function(params) {
       }
     }
   };
+  // });
 
   // wr.listen(xhr, "readystatechange", onReadyStateChange);
 
@@ -145,20 +149,22 @@ wr.ajax = function(params) {
 };
 
 
-wr.get = function(url, success, fail) {
+wr.get = function(url, success, fail, progress) {
   var params = {
     method: "GET",
     headers: {},
     url: wr.saltUrl(url),
     data: null,
     success: success,
-    fail: fail
+    fail: fail,
+    progress: progress
   };
+
   wr.ajax(params);
 };
 
 
-wr.post = function(url, data, xsrf, success, fail) {
+wr.post = function(url, data, xsrf, success, fail, progress) {
   var params = {
     method: "POST",
     headers: {
@@ -168,16 +174,21 @@ wr.post = function(url, data, xsrf, success, fail) {
     url: url,
     data: wr.encodeData(data),
     success: success,
-    fail: fail
+    fail: fail,
+    progress: progress
   };
+
   wr.ajax(params);
 };
 
 
-wr.postFiles = function(url, files, xsrf, success, fail) {
+wr.postFiles = function(url, files, xsrf, success, fail, progress) {
   var data = new FormData();
+  var file;
+
   for (var i = 0, length = files.length; i < length; ++i) {
-    data.append("file", files[i]);
+    file = files[i];
+    data.append(file.name, file);
   }
 
   var params = {
@@ -189,20 +200,24 @@ wr.postFiles = function(url, files, xsrf, success, fail) {
     url: url,
     data: data,
     success: success,
-    fail: fail
+    fail: fail,
+    progress: progress
   };
+
   wr.ajax(params);
 };
 
 
-wr.getCached = function(url, success, fail) {
+wr.getCached = function(url, success, fail, progress) {
   var params = {
     method: "GET",
     headers: {},
     url: url,
     data: null,
     success: success,
-    fail: fail
+    fail: fail,
+    progress: progress
   };
+
   wr.ajax(params);
 };
