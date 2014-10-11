@@ -144,6 +144,14 @@ wr.addJs = function(content) {
 };
 
 
+wr.addJsUrl = function(url) {
+  var node = wr.createElement("script");
+  node.type = "text/javascript";
+  node.src = url;
+  wr.appendChild(wr.global.document.getElementsByTagName("head")[0], node);
+};
+
+
 wr.addCss = function(content) {
   var node = wr.createElement("style");
   node.type = "text/css";
