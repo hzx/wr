@@ -45,6 +45,7 @@ set(ui_sources
   ui/Calendar.js
   ui/Progressbar.js
   ui/Scrollbar.js
+  ui/Map.js
 )
 
 add_custom_target(${PROJECT_NAME} ALL DEPENDS ${sources}
