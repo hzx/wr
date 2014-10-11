@@ -17,6 +17,7 @@
   border: 1px solid $border_color;
   @include border-radius(2px);
   cursor: pointer;
+  @include noselect();
 }
 
 
@@ -24,6 +25,7 @@
   position: absolute;
   left: 0;
   background-color: $bg_color2;
+  z-index: 20;
 }
 
 
@@ -33,6 +35,7 @@
   padding: 4px 8px;
   border-bottom: 1px solid $border_color;
   cursor: pointer;
+  @include noselect();
   &:hover {
     background-color: #f7f7f7;
   }

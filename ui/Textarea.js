@@ -4,7 +4,7 @@ ui.Textarea = function() {
 
   this.value = "";
   this.userClass = "";
-  this.heightDelta = 32;
+  this.heightDelta = 24;
   this.eventChange = new wr.Event();
   this.eventBlur = new wr.Event();
 };
