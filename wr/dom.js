@@ -104,8 +104,9 @@ wr.mapToKeysString = function(mp) {
 
 wr.addClass = (function() {
   return wr.global.DOMTokenList ? function(node, name) {
-    node.classList.add(name);
+    if (name) node.classList.add(name);
   } : function(node, name) {
+    if (!name) return;
     if (!node.cn) {
       node.cn = {};
     }
@@ -117,8 +118,9 @@ wr.addClass = (function() {
 
 wr.removeClass = (function() {
   return wr.global.DOMTokenList ? function(node, name) {
-    node.classList.remove(name);
+    if (name) node.classList.remove(name);
   } : function(node, name) {
+    if (!name) return;
     if (node.cn && (name in node.cn)) {
       delete node.cn[name];
       node.className = wr.mapToKeysString(node.cn);
