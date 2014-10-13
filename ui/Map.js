@@ -66,6 +66,12 @@ ui.Map.prototype.create = function() {
 
 ui.Map.prototype.createMap = function() {
   var options = {
+    disableDefaultUI: true,
+    panControl: true,
+    zoomControl: true,
+    zoomControlOptions: {
+      style: google.maps.ZoomControlStyle.LARGE
+    },
     scrollwheel: false,
     zoom: this.zoom,
     center: new google.maps.LatLng(this.lat, this.lng)
