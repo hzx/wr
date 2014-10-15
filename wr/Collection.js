@@ -4,6 +4,7 @@ wr.Collection = function() {
   this.objs = {};
   this.ids = [];
 
+  this.eventIdChange = new wr.Event();
   this.eventReset = new wr.Event();
   this.eventInsert = new wr.Event();
   this.eventAppend = new wr.Event();
@@ -30,6 +31,26 @@ wr.Collection.prototype.reset = function(objs) {
   }
 
   this.eventReset.notify(this);
+};
+
+
+wr.Collection.prototype.updateId = function(old, id) {
+  if (old === id) return;
+
+  // backup, delete and set with new id
+  var obj = this.objs[old];
+  delete this.objs[old];
+  this.objs[id] = obj;
+  
+  // replace id in ids
+  for (var i = 0, length = this.ids.length; i < length; ++i) {
+    if (this.ids[i] === old) {
+      this.ids[i] = id;
+      break;
+    }
+  }
+
+  this.eventIdChange.notify(old, id);
 };
 
 
