@@ -102,7 +102,7 @@ ui.Radiolist.prototype.remove = function(id) {
 };
 
 
-ui.Radiolist.prototype.selectOption = function(element) {
+ui.Radiolist.prototype.selectOption = function(element, silent) {
   // not select twice
   if (this.last === element) {
     return;
@@ -117,12 +117,17 @@ ui.Radiolist.prototype.selectOption = function(element) {
 
   wr.addClass(element, "select");
 
-  this.eventChange.notify2(old, element.optionId);
+  if (!silent) this.eventChange.notify2(old, element.optionId);
 };
 
 
 ui.Radiolist.prototype.reset = function() {
-  this.selectOption(this.optionDefault);
+  this.selectOption(this.optionDefault, false);
+};
+
+
+ui.Radiolist.prototype.resetSilent = function() {
+  this.selectOption(this.optionDefault, true);
 };
 
 
@@ -132,5 +137,5 @@ ui.Radiolist.prototype.onDefaultClick = function(e) {
 
 
 ui.Radiolist.prototype.onOptionClick = function(e) {
-  this.selectOption(e.target);
+  this.selectOption(e.target, false);
 };

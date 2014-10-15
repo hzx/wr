@@ -99,7 +99,12 @@ ui.Combobox.prototype.init = function() {
 
 
 ui.Combobox.prototype.reset = function() {
-  this.selectOption(this.optionDefault);
+  this.selectOption(this.optionDefault, false);
+};
+
+
+ui.Combobox.prototype.resetSilent = function() {
+  this.selectOption(this.optionDefault, true);
 };
 
 
@@ -162,15 +167,27 @@ ui.Combobox.prototype.empty = function() {
 };
 
 
-ui.Combobox.prototype.select = function(id) {
+ui.Combobox.prototype.getOption = function(id) {
   var child = this.options.firstChild;
+
   while (child) {
-    if (child.optionId === id) {
-      this.selectOption(child);
-      break;
-    }
+    if (child.optionId === id) return child;
     child = child.nextSibling;
   }
+
+  return null;
+};
+
+
+ui.Combobox.prototype.select = function(id) {
+  var option = this.getOption(id);
+  if (option) this.selectOption(option, true);
+};
+
+
+ui.Combobox.prototype.selectSilent = function(id) {
+  var option = this.getOption(id);
+  if (option) this.selectOption(option, false);
 };
 
 
@@ -202,7 +219,7 @@ ui.Combobox.prototype.updateOption = function(id, text) {
 };
 
 
-ui.Combobox.prototype.selectOption = function(element) {
+ui.Combobox.prototype.selectOption = function(element, silent) {
   // not select twice
   if (this.last === element) {
     return;
@@ -217,7 +234,7 @@ ui.Combobox.prototype.selectOption = function(element) {
 
   wr.setText(this.value, wr.getText(this.last));
 
-  this.eventChange.notify2(old, element.optionId);
+  if (!silent) this.eventChange.notify2(old, element.optionId);
 };
 
 
@@ -285,7 +302,7 @@ ui.Combobox.prototype.onDefaultClick = function(e) {
 
 
 ui.Combobox.prototype.onOptionClick = function(e) {
-  this.selectOption(e.target);
+  this.selectOption(e.target, false);
   this.collapse();
 };
 
