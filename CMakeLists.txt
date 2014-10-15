@@ -17,6 +17,7 @@ set(sources
   wr/fx.js
   wr/Event.js
   wr/Logger.js
+  wr/Value.js
   wr/Collection.js
   wr/DragDrop.js
   wr/net.js
