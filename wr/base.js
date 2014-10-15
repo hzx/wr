@@ -43,6 +43,18 @@ wr.addSingleton = function(cl) {
 };
 
 
+wr.addViewSingleton = function(cl) {
+  cl.instance_ = null;
+  cl.getInstance = function() {
+    if (!cl.instance_) {
+      cl.instance_ = new cl();
+      cl.instance_.create();
+    }
+    return cl.instance_;
+  };
+}
+
+
 wr.initQueue_ = [];
 
 
