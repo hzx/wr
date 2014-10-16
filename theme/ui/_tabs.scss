@@ -1,0 +1,38 @@
+@import "css3";
+
+.ui_tabs {
+}
+
+.ui_tabs_headers {
+  border-bottom: 1px solid $border_color;
+  padding-left: 4px;
+}
+
+.ui_tabs_clear {
+  clear: both;
+}
+
+.ui_tabs_content {
+  background-color: #fafafa;
+  padding: 16px 8px 24px 8px;
+}
+
+.ui_tabs_tab {
+  float: left;
+  padding: 6px 8px;
+  margin-right: 4px;
+  border: 1px solid $border_color;
+  border-bottom-style: none;
+  background-color: $bg_color2;
+  font-size: 14px;
+  font-family: $sans_serif_font_family;
+  cursor: pointer;
+  @include noselect();
+
+  &.select {
+    background-color: #fafafa;
+    cursor: default;
+    padding-bottom: 7px; // increase by one pixel
+    margin-bottom: -1px;
+  }
+}
