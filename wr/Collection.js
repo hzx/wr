@@ -1,15 +1,37 @@
 
-wr.Collection = function() {
+wr.Collection = function(model) {
+  this.model = model;
   // store for models objects
   this.objs = {};
   this.ids = [];
 
   this.eventIdChange = new wr.Event();
+  this.eventUpdate = new wr.Event();
   this.eventReset = new wr.Event();
   this.eventInsert = new wr.Event();
   this.eventAppend = new wr.Event();
   this.eventRemove = new wr.Event();
   this.eventMove = new wr.Event();
+};
+
+
+wr.Collection.prototype.serializeValue = function(name, value) {
+  return this.model ? this.model.serializeValue(name, value) : value.toString();
+};
+
+
+wr.Collection.prototype.serialize = function(obj) {
+  return this.model ? this.model.serialize(obj) : JSON.stringify(obj);
+};
+
+
+wr.Collection.prototype.unserializeValue = function(name, value) {
+  return this.model ? this.model.unserializeValue(name, value) : value;
+};
+
+
+wr.Collection.prototype.unserialize = function(obj) {
+  return this.model ? this.model.unserialize(obj) : obj;
 };
 
 
@@ -26,7 +48,7 @@ wr.Collection.prototype.reset = function(objs) {
       continue;
     }
 
-    this.objs[obj.id] = obj;
+    this.objs[obj.id] = this.unserialize(obj);
     this.ids.push(obj.id);
   }
 
@@ -50,7 +72,28 @@ wr.Collection.prototype.updateId = function(old, id) {
     }
   }
 
-  this.eventIdChange.notify(old, id);
+  this.eventIdChange.notify2(old, id);
+};
+
+
+wr.Collection.prototype.update = function(id, params) {
+  var obj = this.objs[id];
+  if (!obj) return;
+
+  var updates = {id: id};
+  var value;
+  var isUpdate = false;
+
+  for (var name in params) {
+    var value = this.unserializeValue(name, params[name]);
+    if (obj[name] !== value) {
+      isUpdate = true;
+      obj[name] = value;
+      updates[name] = value;
+    }
+  }
+
+  if (isUpdate) this.eventUpdate.notify(updates);
 };
 
 
@@ -195,4 +238,9 @@ wr.Collection.prototype.prev = function(id) {
   }
 
   return null;
+};
+
+
+wr.coll = function(modelClass) {
+  return new wr.Collection(modelClass ? new modelClass() : null);
 };

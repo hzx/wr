@@ -22,6 +22,8 @@ ui.Textarea.prototype.create = function() {
     this.input
   ]);
 
+  wr.addClass(this.node, this.userClass);
+
   this.events = [
     [this.node, "click", wr.bind(this, this.onClick)],
     [this.input, "keyup", wr.bind(this, this.onInputKeyup)],

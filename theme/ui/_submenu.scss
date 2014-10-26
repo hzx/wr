@@ -1,0 +1,32 @@
+@import "css3";
+
+.ui_submenu {
+  position: relative;
+
+  &.expand .ui_submenu_label {
+    background-image: url(img/common/arrow_back.png);
+  }
+}
+
+.ui_submenu_label {
+  padding-right: 24px;
+  font-size: 14px;
+  font-family: $sans_serif_font_family;
+  background: url(img/common/arrow.png) no-repeat right 50% $bg_color;
+  cursor: pointer;
+  @include noselect();
+}
+
+.ui_submenu_options {
+  position: absolute;
+  left: 0;
+  width: 200px;
+}
+
+.ui_submenu_option {
+  padding: 6px 8px;
+  font-size: 14px;
+  font-family: $sans_serif_font_family;
+  cursor: pointer;
+  @include noselect();
+}

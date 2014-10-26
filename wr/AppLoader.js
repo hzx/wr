@@ -171,8 +171,8 @@ wr.AppLoader.prototype.init = function(app, url) {
         me.enqueueJs(buf[i]);
       }
     }
-    if ("json" in response) {
-      buf = response["json"];
+    if ("data" in response) {
+      buf = response["data"];
       for (i = 0, length = buf.length; i < length; ++i) {
         me.enqueueJson(buf[i]);
       }

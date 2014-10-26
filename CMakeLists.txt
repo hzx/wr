@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 project(wr)
 
 set(sources
-  json3.js
   wr/base.js
   wr/Hasher.js
   wr/utils.js
@@ -18,11 +17,16 @@ set(sources
   wr/Event.js
   wr/Logger.js
   wr/Value.js
+  wr/Model.js
   wr/Collection.js
+  wr/Entity.js
+  wr/View.js
+  wr/Widget.js
+  wr/Container.js
   wr/DragDrop.js
   wr/net.js
+  wr/Sync.js
   wr/World.js
-  wr/View.js
   wr/RouterHelper.js
   wr/Router.js
   wr/App.js
@@ -48,6 +52,8 @@ set(ui_sources
   ui/Scrollbar.js
   ui/Map.js
   ui/Tabs.js
+  ui/Submenu.js
+  ui/Dialog.js
 )
 
 add_custom_target(${PROJECT_NAME} ALL DEPENDS ${sources}

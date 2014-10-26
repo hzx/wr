@@ -1,9 +1,30 @@
+@import "css3";
 
 .ui_radiolist {
+  overflow: hidden;
 }
 
 .ui_radiolist_options {
 }
 
 .ui_radiolist_default, .ui_radiolist_option {
+  float: left;
+  font-size: 14px;
+  font-family: $sans_serif_font_family;
+  padding: 6px 6px;
+  margin-right: 1px;
+  background-color: #e3e3e3;
+  color: #3d3d3d;
+  cursor: pointer;
+  @include noselect();
+
+  &:hover {
+    background-color: #ade0e0;
+  }
+
+  &.select {
+    background-color: #009999;
+    color: #fff;
+    cursor: default;
+  }
 }

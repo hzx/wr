@@ -1,0 +1,54 @@
+@import "css3";
+
+.ui_dialog {
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  // height: 100%;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.ui_dialog_overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #444;
+  z-index: 1;
+}
+
+.ui_dialog_scroll {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  z-index: 2;
+}
+
+.ui_dialog_wrap {
+  position: relative;
+  width: 1200px;
+  margin: 16px auto;
+  background-color: #fff;
+}
+
+.ui_dialog_content {
+  padding: 0 16px 16px 16px;
+}
+
+.ui_dialog_button_close {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 4px;
+  right: 4px;
+  background-color: $bg_color;
+}
+
+.ui_dialog_title {
+  font-size: 24px;
+  font-family: $sans_serif_font_family;
+  padding: 8px 0 2px 0;
+  margin: 0 60px 32px 0;
+  border-bottom: 1px solid #c3c3c3;
+}

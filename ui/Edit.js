@@ -4,7 +4,8 @@ ui.Edit = function() {
 
   this.value = "";
   this.userClass = "";
-  this.validateValue = wr.dummyTrue;
+  this.symbols = wr.dummyTrue;
+  this.format = wr.dummyTrue;
   this.type = "text";
 
   this.eventChange = new wr.Event();
@@ -89,25 +90,26 @@ ui.Edit.prototype.clear = function() {
 
 
 ui.Edit.prototype.validate = function() {
-  var value = wr.trimString(this.input.value);
-  if (value.length == 0) return true;
-  var isvalid = this.validateValue ? this.validateValue(value) : false;
-  return isvalid;
+  var valid = this.format(wr.trimString(this.input.value));
+
+  if (valid) wr.removeClass(this.node, "error");
+  else wr.addClass(this.node, "error");
+
+  return valid;
 };
 
 
 ui.Edit.prototype.validateChange = function() {
-  var isvalid = this.validate();
+  var value = wr.trimString(this.input.value);
+  var isvalid = this.symbols(value);
 
   if (isvalid) {
     wr.removeClass(this.node, "error");
 
-    var newValue = wr.trimString(this.input.value);
-
-    if (this.value !== newValue) {
-      var oldValue = this.value;
-      this.value = newValue;
-      this.eventChange.notify2(oldValue, newValue);
+    if (this.value !== value) {
+      var old = this.value;
+      this.value = value;
+      this.eventChange.notify2(old, value);
     }
     return true;
   } else {
@@ -138,4 +140,5 @@ ui.Edit.prototype.onInputFocus = function(e) {
 
 ui.Edit.prototype.onInputBlur = function(e) {
   this.setFocus(false);
+  this.validate();
 };

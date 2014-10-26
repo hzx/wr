@@ -9,7 +9,6 @@ ui.Combobox = function() {
 
   this.isExpand = false;
   this.editValue = "";
-  this.node = null;
   this.isEnter = false;
   this.eventChange = new wr.Event();
   this.last = null;

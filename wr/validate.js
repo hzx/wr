@@ -1,17 +1,20 @@
 
 
-wr.loginSymbolsRe_ = /[a-zA-Z0-9\-_]*/g
-wr.loginRe_ = /^[a-zA-Z0-9\-_]+$/g
-wr.passwordSymbolsRe_ = /[a-zA-Z0-9\-+_\/=]*/g
-wr.passwordRe_ = /^[a-zA-Z0-9\-+_\/=]+$/g
-wr.emailSymbolsRe_ = /[a-zA-Zа-яА-Я0-9@\-_.]*/g
-wr.emailRe_ = /^(?:[a-zA-Z0-9\-_.]+)@(?:[a-zA-Zа-яА-Я0-9\-_.]+)\.(?:[a-zA-Zа-яА-Я0-9\-_]{2,}$)/g
-wr.intSymbolsRe_ = /[-+0-9]*/g
-wr.intRe_ = /^[-+]?[0-9]+$/g
-wr.floatSymbolsRe_ = /[-+.0-9]*/g
-wr.floatRe_ =  /^[-+]?[0-9]+\.?[0-9]*$/g
-wr.hexColorSymbolsRe_ = /[a-fA-F0-9]*/g
-wr.hexColorRe_ = /^#?[a-fA-F0-9]{3,6}$/g
+wr.nameSymbolsRe = /[^[a-zA-Z0-0\-\ ]*$]/g;
+wr.loginSymbolsRe_ = /^[a-zA-Z0-9\-_]*$/g;
+wr.loginRe_ = /^[a-zA-Z0-9\-_]+$/g;
+wr.passwordSymbolsRe_ = /^[a-zA-Z0-9\-+_\/=]*$/g;
+wr.passwordRe_ = /^[a-zA-Z0-9\-+_\/=]+$/g;
+wr.emailSymbolsRe_ = /^[a-zA-Zа-яА-Я0-9@\-_.]*$/g;
+wr.emailRe_ = /^(?:[a-zA-Z0-9\-_.]+)@(?:[a-zA-Zа-яА-Я0-9\-_.]+)\.(?:[a-zA-Zа-яА-Я0-9\-_]{2,}$)/g;
+wr.intSymbolsRe_ = /^[-+0-9]*$/g;
+wr.intRe_ = /^[-+]?[0-9]+$/g;
+wr.intOptRe_ = /^(?:[-+]?[0-9]+)?$/g;
+wr.floatSymbolsRe_ = /^[-+.0-9]*$/g;
+wr.floatRe_ =  /^[-+]?[0-9]+\.?[0-9]*$/g;
+wr.floatOptRe_ = /^(?:[-+]?[0-9]+\.?[0-9]*)?$/g;
+wr.hexColorSymbolsRe_ = /^[a-fA-F0-9]*$/g;
+wr.hexColorRe_ = /^#?[a-fA-F0-9]{3,6}$/g;
 
 
 wr.validate = function(re, value) {
@@ -21,61 +24,71 @@ wr.validate = function(re, value) {
 };
 
 
-wr.validateLoginSymbols = function(value) {
+wr.symbolsLogin = function(value) {
   return wr.validate(wr.loginSymbolsRe_, value);
 };
 
 
-wr.validateLogin = function(value) {
+wr.formatLogin = function(value) {
   return wr.validate(wr.loginRe_, value);
 };
 
 
-wr.validatePasswordSymbols = function(value) {
+wr.symbolsPassword = function(value) {
   return wr.validate(wr.passwordSymbolsRe_, value);
 };
 
 
-wr.validatePassword = function(value) {
+wr.formatPassword = function(value) {
   return wr.validate(wr.passwordRe_, value);
 };
 
 
-wr.validateEmailSymbols = function(value) {
+wr.symbolsEmail = function(value) {
   return wr.validate(wr.emailSymbolsRe_, value);
 };
 
 
-wr.validateEmail = function(value) {
+wr.formatEmail = function(value) {
   return wr.validate(wr.emailRe_, value);
 };
 
 
-wr.validateIntSymbols = function(value) {
+wr.symbolsInt = function(value) {
   return wr.validate(wr.intSymbolsRe_, value);
 };
 
 
-wr.validateInt = function(value) {
+wr.formatInt = function(value) {
   return wr.validate(wr.intRe_, value);
 };
 
 
-wr.validateFloatSymbols = function(value) {
+wr.formatIntOpt = function(value) {
+  return wr.validate(wr.intOptRe_, value);
+};
+
+
+wr.symbolsFloat = function(value) {
   return wr.validate(wr.floatSymbolsRe_, value);
 };
 
 
-wr.validateFloat = function(value) {
+wr.formatFloat = function(value) {
   return wr.validate(wr.floatRe_, value);
 };
 
 
-wr.validateHexColorSymbols = function(value) {
+wr.formatFloatOpt = function(value) {
+  return wr.validate(wr.floatOptRe_, value);
+};
+
+
+wr.symbolsHexColor = function(value) {
   return wr.validate(wr.hexColorSymbolsRe_, value);
 }
 
 
-wr.validateHexColor = function(value) {
+wr.formatHexColor = function(value) {
   return wr.validate(wr.hexColorRe_, value);
 };

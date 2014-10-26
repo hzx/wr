@@ -18,3 +18,9 @@ wr.Hasher.prototype.generate = function() {
   this.last = hash;
   return hash;
 };
+
+wr.hasher = new wr.Hasher();
+
+wr.hash = function() {
+  return wr.hasher.generate();
+};
