@@ -1,0 +1,44 @@
+export HOME
+JSC = $HOME/bin/closure-compiler.jar
+
+WR_SRC = \
+base.js\
+Hasher.js\
+utils.js\
+datetime.js\
+validate.js\
+events.js\
+dom.js\
+dom_utils.js\
+style.js\
+splines.js\
+animation.js\
+fx.js\
+Event.js\
+Logger.js\
+Value.js\
+Model.js\
+Collection.js\
+Entity.js\
+View.js\
+Widget.js\
+Container.js\
+DragDrop.js\
+net.js\
+Sync.js\
+World.js\
+RouterHelper.js\
+Router.js\
+App.js\
+AppLoader.js
+
+ifeq (@(DEBUG),1)
+BUILD=build-debug
+JSLEVEL=SIMPLE
+else
+BUILD=build-release
+JSLEVEL=ADVANCED
+endif
+
+!js = |> java -jar $(JSC) --js %f --js_output_file %o --create_source_map %B.map.js --compilation_level $(JSLEVEL) |> %B.min.js | %B.map.js
+!optimg = |> optipng -o7 -zm1-9 %f -out %o |> %B.o.%e

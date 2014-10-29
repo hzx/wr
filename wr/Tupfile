@@ -1,0 +1,4 @@
+include_rules
+
+: $(WR_SRC) |> cat %f > %o |> %d.js {js}
+: {js} |> !js |>

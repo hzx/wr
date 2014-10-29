@@ -1,0 +1,26 @@
+include_rules
+
+UI_SRC = \
+base.js\
+Upload.js\
+Hint.js\
+Edit.js\
+Textarea.js\
+Image.js\
+Gallery.js\
+GalleryEdit.js\
+Slider.js\
+Combobox.js\
+Checkbox.js\
+Checklist.js\
+Radiolist.js\
+Calendar.js\
+Progressbar.js\
+Scrollbar.js\
+Map.js\
+Tabs.js\
+Submenu.js\
+Dialog.js
+
+: ../wr/wr.js $(UI_SRC) |> cat  %f > %o |> %d.js {js}
+: {js} |> !js |>
