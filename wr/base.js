@@ -74,3 +74,7 @@ wr.dummyTrue = function() {
 wr.dummyFalse = function() {
   return false;
 };
+
+
+wr.DELIM_ROW = "\u0001";
+wr.DELIM_FIELD = "\u0002";
