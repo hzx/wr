@@ -67,63 +67,17 @@ wr.encodeData = function(data) {
 };
 
 
-wr.Xhr = function() {
-  this.xhr = wr.createXhr();
-};
-
-
-wr.Xhr.prototype.ajax = function(params) {
-  this.xhr.open(params.method, params.url, true);
-  this.xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-
-  for (var name in params.headers) {
-    this.xhr.setRequestHeader(name, params.headers[name]);
-  }
-
-  xhr.send(params.data);
-};
-
-
-wr.Xhr.prototype.parseResponse = function() {
-};
-
-
-wr.Xhr.prototype.onreadystatechange = function() {
-};
-
-wr.onreadystatechange = function(e) {
-};
-
-
 // params - {method, headers, url, data, success, fail}
 wr.ajax = function(params) {
   var xhr = wr.createXhr();
 
   xhr.onreadystatechange = function() {
-  // wr.listen(xhr, "readystatechange", function(e) {
     if (xhr.readyState === 4) {
-      var response;
+      var response = xhr.responseText;
       var status = xhr.status;
-
-      var contentType = xhr.getResponseHeader("Content-Type");
-      if (contentType) {
-        switch (contentType.toLowerCase()) {
-          case "application/json;charset=utf-8":
-            try {
-              response = JSON.parse(xhr.responseText);
-            } catch (e) {
-              response = {};
-            }
-            break;
-          default:
-            response = xhr.responseText;
-            break;
-        }
-      }
 
       // clean xhr
       xhr.onreadystatechange = null;
-      // wr.unlisten(xhr, "readystatechange", onReadyStateChange);
       delete xhr;
       xhr = null;
 
@@ -135,9 +89,6 @@ wr.ajax = function(params) {
       }
     }
   };
-  // });
-
-  // wr.listen(xhr, "readystatechange", onReadyStateChange);
 
   xhr.open(params.method, params.url, true);
   xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
