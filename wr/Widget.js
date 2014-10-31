@@ -79,7 +79,7 @@ wr.Widget.prototype.insertElement = function(element, beforeId) {
     this.node.insertBefore(element, this.elements[beforeId]);
   }
 
-  this.elements[element.obj.id] = element;
+  this.elements[element.objId] = element;
 
   this.listenItem(element);
 };
@@ -90,7 +90,7 @@ wr.Widget.prototype.changeId = function(old, id) {
   var element = this.elements[old];
   if (!element) return;
 
-  if (element.obj.id !== id) element.obj.id = id;
+  if (element.objId !== id) element.objId = id;
 
   delete this.elements[old];
   this.elements[id] = element;
@@ -104,19 +104,20 @@ wr.Widget.prototype.update = function(params) {
 
 wr.Widget.prototype.insert = function(obj, beforeId) {
   var element = this.createItem(obj);
-  element.obj = obj;
+  element.objId = obj[1];
 
   this.insertElement(element, beforeId);
 };
 
 
 wr.Widget.prototype.append = function(obj) {
+  var id = obj[1];
   var element = this.createItem(obj);
-  element.obj = obj;
+  element.objId = id;
 
   this.node.appendChild(element);
 
-  this.elements[obj.id] = element;
+  this.elements[id] = element;
 
   this.listenItem(element);
 };

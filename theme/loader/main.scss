@@ -1,0 +1,43 @@
+@import "reset";
+
+.loader {
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fef4e7;
+}
+
+.loader_logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  // width: 162px;
+  // height: 71px;
+  // margin-left: -81px;
+  // margin-top: -36px;
+  // background: url(img/common/logo.png) left top no-repeat transparent;
+}
+
+.loader_errors {
+  margin: 24px;
+}
+
+.loader_error {
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #c99756;
+  background-color: #f1e5d5;
+  color: #4b3417;
+}
+
+
+// .login_loader_fatal_error {
+//   padding: 8px;
+//   margin-bottom: 16px;
+//   border: 1px solid #c95656;
+//   background-color: #f1d5d5;
+//   color: #4b1717;
+// }

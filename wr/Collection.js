@@ -39,17 +39,19 @@ wr.Collection.prototype.reset = function(objs) {
   this.objs = {}
   this.ids = [];
   var obj;
+  var id;
 
   for (var i = 0, length = objs.length; i < length; ++i) {
     obj = objs[i];
+    id = obj[1];
 
     // skip doubles
-    if (obj.id in this.objs) {
+    if (id in this.objs) {
       continue;
     }
 
-    this.objs[obj.id] = this.unserialize(obj);
-    this.ids.push(obj.id);
+    this.objs[id] = this.unserialize(obj);
+    this.ids.push(id);
   }
 
   this.eventReset.notify(this);
@@ -98,8 +100,10 @@ wr.Collection.prototype.update = function(id, params) {
 
 
 wr.Collection.prototype.insert = function(obj, beforeId) {
+  var id = obj[1];
+
   // not append doubles
-  if (obj.id in this.objs) {
+  if (id in this.objs) {
     return;
   }
 
@@ -107,7 +111,7 @@ wr.Collection.prototype.insert = function(obj, beforeId) {
   var i, length;
 
   // add to objects
-  this.objs[obj.id] = obj;
+  this.objs[id] = obj;
 
   if (beforeId && beforeId in this.objs) {
     // add to ids
@@ -119,7 +123,7 @@ wr.Collection.prototype.insert = function(obj, beforeId) {
     }
 
     // copy id
-    ids.push(obj.id);
+    ids.push(id);
 
     // copy elements beforeId and after
     for (i = ib, length = this.ids.length; i < length; ++i) {
@@ -129,7 +133,7 @@ wr.Collection.prototype.insert = function(obj, beforeId) {
   } else {
     beforeId = null;
 
-    ids.push(obj.id);
+    ids.push(id);
 
     // copy all id
     for (i = 0, length = this.ids.length; i < length; ++i) {
@@ -145,13 +149,15 @@ wr.Collection.prototype.insert = function(obj, beforeId) {
 
 
 wr.Collection.prototype.append = function(obj) {
+  var id = obj[1];
+
   // not append doubles
-  if (obj.id in this.objs) {
+  if (id in this.objs) {
     return;
   }
 
-  this.objs[obj.id] = obj;
-  this.ids.push(obj.id);
+  this.objs[id] = obj;
+  this.ids.push(id);
 
   this.eventAppend.notify(obj);
 };

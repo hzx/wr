@@ -1,0 +1,8 @@
+include_rules
+
+SRC = \
+base.js\
+AppView.js\
+App.js
+
+: $(SRC) |> cat %f > %o |> loader.js

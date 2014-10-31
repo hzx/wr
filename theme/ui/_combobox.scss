@@ -24,6 +24,9 @@
 .ui_combobox_dropdown {
   position: absolute;
   left: 0;
+  box-sizing: border-box;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
   background-color: $bg_color2;
   z-index: 20;
 }

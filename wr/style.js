@@ -1,3 +1,6 @@
+wr.css = function(name) {
+  return !!CLOSURE_CSS_NAME_MAPPING ? CLOSURE_CSS_NAME_MAPPING[name] : name;
+};
 
 wr.getStyle = function(element, name) {
 };

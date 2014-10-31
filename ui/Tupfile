@@ -22,5 +22,5 @@ Tabs.js\
 Submenu.js\
 Dialog.js
 
-: ../wr/wr.js $(UI_SRC) |> cat  %f > %o |> %d.js {js}
-: {js} |> !js |>
+: $(UI_SRC) |> cat  %f > %o |> %d.js {js}
+#: {js} |> !js |>

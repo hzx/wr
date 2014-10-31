@@ -1,5 +1,6 @@
 export HOME
 JSC = $HOME/bin/closure-compiler.jar
+IC = python $HOME/bin/image64.py
 
 WR_SRC = \
 base.js\
@@ -29,8 +30,7 @@ Sync.js\
 World.js\
 RouterHelper.js\
 Router.js\
-App.js\
-AppLoader.js
+App.js
 
 ifeq (@(DEBUG),1)
 BUILD=build-debug
