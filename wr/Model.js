@@ -8,16 +8,16 @@ wr.Model.prototype.serializeValue = function(value, type) {
   switch (type) {
     case "int":
       return value;
-    case "date":
-      return "\"" + wr.strftime(value, "%L") + "\"";
-    case "tdate":
-      return value.getTime();
-    case "string":
-      return "\"" + value + "\"";
     case "float":
       return value;
+    case "string":
+      return value;
+    case "date":
+      return wr.strftime(value, "%L");
+    case "tdate":
+      return value.getTime();
     case "image":
-      return "\"" + value + "\"";
+      return value;
     default:
       return "";
   };
@@ -31,12 +31,12 @@ wr.Model.prototype.serialize = function(obj) {
   for (var name in obj) {
     if (name in this.fields) {
       params = this.fields[name];
-      buf.push("\"" + name + "\":" +
-        this.serializeValue(obj[name], params.type));
+      buf.push(name);
+      buf.push(this.serializeValue(obj[name], params.type));
     }
   }
 
-  return "{" + buf.join(",") + "}";
+  return buf.join(wr.DELIM_FIELD);
 };
 
 

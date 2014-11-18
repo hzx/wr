@@ -76,5 +76,5 @@ wr.dummyFalse = function() {
 };
 
 
-wr.DELIM_ROW = "\u0001";
-wr.DELIM_FIELD = "\u0002";
+wr.DELIM_ROW = "\1";
+wr.DELIM_FIELD = "\2";

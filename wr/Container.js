@@ -1,5 +1,5 @@
 
-// Is presenter linked to collection events and shower (object view)
+// Is presenter linked to collection events and widget
 // who show collection
 wr.Container = function(collection, shower) {
   this.collection = collection;

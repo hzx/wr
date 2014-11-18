@@ -26,6 +26,7 @@ Widget.js\
 Container.js\
 DragDrop.js\
 net.js\
+db_types.js\
 Sync.js\
 World.js\
 RouterHelper.js\

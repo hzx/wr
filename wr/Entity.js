@@ -7,6 +7,26 @@ wr.Entity = function(model) {
 };
 
 
+wr.Entity.prototype.serializeValue = function(name, value) {
+  return this.model ? this.model.serializeValue(name, value) : value.toString();
+};
+
+
+wr.Entity.prototype.serialize = function(obj) {
+  return this.model ? this.model.serialize(obj) : "";
+};
+
+
+wr.Entity.prototype.unserializeValue = function(name, value) {
+  return this.model ? this.model.unserializeValue(name, value) : value;
+};
+
+
+wr.Entity.prototype.unserialize = function(obj) {
+  return this.model ? this.model.unserialize(obj) : obj;
+};
+
+
 wr.Entity.prototype.update = function(params) {
   var updates = {};
   var value;

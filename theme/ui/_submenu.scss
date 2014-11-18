@@ -4,7 +4,7 @@
   position: relative;
 
   &.expand .ui_submenu_label {
-    background-image: url(img/common/arrow_back.png);
+    background-image: url(img/ui/arrow_back.png);
   }
 }
 
@@ -12,7 +12,7 @@
   padding-right: 24px;
   font-size: 14px;
   font-family: $sans_serif_font_family;
-  background: url(img/common/arrow.png) no-repeat right 50% $bg_color;
+  background: url(img/ui/arrow.png) no-repeat right 50% $bg_color;
   cursor: pointer;
   @include noselect();
 }

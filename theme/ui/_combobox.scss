@@ -4,7 +4,7 @@
 .ui_combobox {
   position: relative;
   &.expand .ui_combobox_value {
-    background-image: url(img/common/arrow_back.png);
+    background-image: url(img/ui/arrow_back.png);
   }
 }
 
@@ -12,7 +12,7 @@
 .ui_combobox_value {
   font-size: 16px;
   padding: 4px 24px 4px 8px;
-  background: url(img/common/arrow.png) no-repeat right 50% $bg_color;
+  background: url(img/ui/arrow.png) no-repeat right 50% $bg_color;
   // background-color: $bg_color;
   border: 1px solid $border_color;
   @include border-radius(2px);

@@ -1,6 +1,9 @@
 
 wr.Collection = function(model) {
   this.model = model;
+  this.parentId = null; // for ordered subcollection
+  this.sync = true; // used in Sync
+
   // store for models objects
   this.objs = {};
   this.ids = [];
@@ -11,7 +14,7 @@ wr.Collection = function(model) {
   this.eventInsert = new wr.Event();
   this.eventAppend = new wr.Event();
   this.eventRemove = new wr.Event();
-  this.eventMove = new wr.Event();
+  this.eventMove = new wr.Event(); // for subcollection in orderField
 };
 
 
@@ -21,7 +24,7 @@ wr.Collection.prototype.serializeValue = function(name, value) {
 
 
 wr.Collection.prototype.serialize = function(obj) {
-  return this.model ? this.model.serialize(obj) : JSON.stringify(obj);
+  return this.model ? this.model.serialize(obj) : "";
 };
 
 
@@ -78,11 +81,18 @@ wr.Collection.prototype.updateId = function(old, id) {
 };
 
 
+wr.Collection.prototype.updateLocal = function(id, params) {
+  this.sync = false;
+  this.update(id, params);
+  this.sync = true;
+};
+
+
 wr.Collection.prototype.update = function(id, params) {
   var obj = this.objs[id];
   if (!obj) return;
 
-  var updates = {id: id};
+  var updates = {"1": id};
   var value;
   var isUpdate = false;
 
@@ -96,6 +106,13 @@ wr.Collection.prototype.update = function(id, params) {
   }
 
   if (isUpdate) this.eventUpdate.notify(updates);
+};
+
+
+wr.Collection.prototype.insertLocal = function(obj, beforeId) {
+  this.sync = false;
+  this.insert(obj, beforeId);
+  this.sync = true;
 };
 
 
@@ -148,6 +165,13 @@ wr.Collection.prototype.insert = function(obj, beforeId) {
 };
 
 
+wr.Collection.prototype.appendLocal = function(obj) {
+  this.sync = false;
+  this.append(obj);
+  this.sync = true;
+};
+
+
 wr.Collection.prototype.append = function(obj) {
   var id = obj[1];
 
@@ -168,6 +192,13 @@ wr.Collection.prototype.get = function(id) {
 };
 
 
+wr.Collection.prototype.removeLocal = function(id) {
+  this.sync = false;
+  this.remove(id);
+  this.sync = true;
+};
+
+
 wr.Collection.prototype.remove = function(id) {
   if (id in this.objs) {
     // remove from ids
@@ -181,6 +212,13 @@ wr.Collection.prototype.remove = function(id) {
 
     this.eventRemove.notify(id);
   }
+};
+
+
+wr.Collection.prototype.moveLocal = function(id, beforeId) {
+  this.sync = false;
+  this.move(id, beforeId);
+  this.sync = true;
 };
 
 
