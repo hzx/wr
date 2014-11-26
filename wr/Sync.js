@@ -17,7 +17,7 @@ wr.Sync = function(url, name, collection, xsrf) {
   this.url = url;
   this.name = name;
   this.collection = collection;
-  this.xsrf = xsrf;
+  // this.xsrf = xsrf;
   this.orderField = null; // for subcollection only
 
   this.meUpdate = wr.bind(this, this.onUpdate);
@@ -58,7 +58,7 @@ wr.Sync.prototype.onUpdate = function(params) {
 
   var me = this;
 
-  wr.post(this.url, data, this.xsrf, function(response) { // success
+  wr.post(this.url, data, world.xsrf, function(response) { // success
     // update additional fields
     var rows = response.split(wr.DELIM_ROW);
     var id = rows[0];
@@ -84,7 +84,7 @@ wr.Sync.prototype.onInsert = function(obj, beforeId) {
 
   var me = this;
 
-  wr.post(this.url, data, this.xsrf, function(response) { // success
+  wr.post(this.url, data, world.xsrf, function(response) { // success
     // update id
     var ids = response.split(wr.DELIM_FIELD);
     me.collection.updateId(ids[0], ids[1]);
@@ -103,7 +103,7 @@ wr.Sync.prototype.onAppend = function(obj) {
 
   var me = this;
 
-  wr.post(this.url, data, this.xsrf, function(response) { // success
+  wr.post(this.url, data, world.xsrf, function(response) { // success
     // update id
     var ids = response.split(wr.DELIM_FIELD);
     me.collection.updateId(ids[0], ids[1]);
@@ -120,7 +120,7 @@ wr.Sync.prototype.onRemove = function(id) {
   data[wr.SYNC_NAME] = this.name;
   data[wr.SYNC_ID] = id;
 
-  wr.post(this.url, data, this.xsrf, function(response) {
+  wr.post(this.url, data, world.xsrf, function(response) {
     // dummy
   }, function(status, response) { // fail
   });
@@ -142,7 +142,7 @@ wr.Sync.prototype.onMove = function(id, beforeId) {
   //   "id": id
   // };
 
-  wr.post(this.url, data, this.xsrf, function(response) { // success
+  wr.post(this.url, data, world.xsrf, function(response) { // success
     // dummy
   }, function(status, response) { // fail
   });

@@ -92,3 +92,9 @@ wr.symbolsHexColor = function(value) {
 wr.formatHexColor = function(value) {
   return wr.validate(wr.hexColorRe_, value);
 };
+
+
+wr.symbolsPresent = function(value) {
+  var va = wr.trimString(value);
+  return va.length > 0;
+};

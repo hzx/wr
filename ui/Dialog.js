@@ -4,9 +4,9 @@ ui.Dialog = function() {
 
   this.titleText = "";
   this.userClass = "";
+
+  this.meClose = wr.bind(this, this.onClose);
 };
-
-
 wr.inherit(ui.Dialog, wr.View);
 
 
@@ -33,6 +33,8 @@ ui.Dialog.prototype.create = function() {
     ])
   ]);
 
+  wr.hide(this.node);
+
   wr.addClass(this.node, this.userClass);
 };
 
@@ -53,5 +55,5 @@ ui.Dialog.prototype.show = function() {
 
 
 ui.Dialog.prototype.hide = function() {
-  wr.fadeIn(this.node, wr.fastTime, wr.dummy);
+  wr.fadeOut(this.node, wr.fastTime, wr.dummy);
 };
