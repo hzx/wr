@@ -63,13 +63,19 @@ wr.Model.prototype.unserializeValue = function(name, value) {
 };
 
 
-wr.Model.prototype.unserialize = function(obj) {
-  var value;
+wr.Model.prototype.unserialize = function(val) {
   var dest = {};
+  var fields = val.split(wr.DELIM_FIELD);
+  var name;
 
-  for (var name in obj) {
-    dest[name] = this.unserializeValue(name, obj[name]);
+  for (var i = 0, length = fields.length; i < length; i += 2) {
+    name = fields[i];
+    dest[name] = this.unserializeValue(name, fields[i+1]);
   }
+
+  // for (var name in obj) {
+  //   dest[name] = this.unserializeValue(name, obj[name]);
+  // }
 
   return dest;
 };

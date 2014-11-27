@@ -1,9 +1,9 @@
 
 // Is presenter linked to collection events and widget
 // who show collection
-wr.Container = function(collection, shower) {
+wr.Container = function(collection, widget) {
   this.collection = collection;
-  this.shower = shower;
+  this.widget = widget;
 
   this.meIdChange = wr.bind(this, this.onIdChange);
   this.meUpdate = wr.bind(this, this.onUpdate);
@@ -38,40 +38,40 @@ wr.Container.prototype.exit = function() {
 
 
 wr.Container.prototype.onIdChange = function(old, id) {
-  this.shower.changeId(old, id);
+  this.widget.changeId(old, id);
 };
 
 
 wr.Container.prototype.onUpdate = function(params) {
-  this.shower.update(params);
+  this.widget.update(params);
 };
 
 
 wr.Container.prototype.onReset = function() {
-  this.shower.empty();
+  this.widget.empty();
 
   var me = this;
   this.collection.forEach(function(obj) {
-    me.shower.append(obj);
+    me.widget.append(obj);
   });
 };
 
 
 wr.Container.prototype.onInsert = function(obj, beforeId) {
-  this.shower.insert(obj, beforeId);
+  this.widget.insert(obj, beforeId);
 };
 
 
 wr.Container.prototype.onAppend = function(obj) {
-  this.shower.append(obj);
+  this.widget.append(obj);
 };
 
 
 wr.Container.prototype.onRemove = function(id) {
-  this.shower.remove(id);
+  this.widget.remove(id);
 };
 
 
 wr.Container.prototype.onMove = function(id, beforeId) {
-  this.shower.move(id, beforeId);
+  this.widget.move(id, beforeId);
 };

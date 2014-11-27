@@ -2,6 +2,7 @@
 wr.Entity = function(model) {
   this.model = model;
   this.obj = model.createDefault();
+  this.sync = true; // used in Sync
 
   this.eventUpdate = new wr.Event();
 };
@@ -42,6 +43,13 @@ wr.Entity.prototype.update = function(params) {
   }
 
   if (isUpdate) this.eventUpdate.notify(updates);
+};
+
+
+wr.Entity.prototype.updateLocal = function(params) {
+  this.sync = false;
+  this.update(params);
+  this.sync = true;
 };
 
 
