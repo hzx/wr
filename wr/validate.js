@@ -94,6 +94,12 @@ wr.formatHexColor = function(value) {
 };
 
 
+wr.formatPresent = function(value) {
+  var va = wr.trimString(value);
+  return va.length > 0;
+}
+
+
 wr.symbolsPresent = function(value) {
   var va = wr.trimString(value);
   return va.length > 0;
