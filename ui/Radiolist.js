@@ -72,33 +72,45 @@ ui.Radiolist.prototype.add = function(id, text) {
   if (this.isEnter) {
     wr.listen(option, "click", this.meOptionClick);
   }
+
+  return option;
 };
 
 
 ui.Radiolist.prototype.updateText = function(id, text) {
-  var option = this.options.firstChild;
-  while (option) {
-    if (option.optionId === id) {
-      wr.setText(option, text);
-    }
-    child = child.nextSibling;
-  }
+  var option = this.get(id);
+  if (option) wr.setText(option, text);
 };
 
 
 ui.Radiolist.prototype.remove = function(id) {
+  var option = this.get(id);
+  if (option) {
+    if (this.isEnter) {
+      wr.unlisten(option, "click", this.meOptionClick);
+    }
+    wr.removeChild(this.options, option);
+  }
+};
+
+
+ui.Radiolist.prototype.updateId = function(old, id) {
+  var option = this.get(old);
+  if (option) {
+    option.optionId = id;
+  }
+};
+
+
+ui.Radiolist.prototype.get = function(id) {
   var option = this.options.firstChild;
   while (option) {
     if (option.optionId === id) {
-      if (this.isEnter) {
-        wr.unlisten(option, "click", this.meOptionClick);
-      }
-
-      wr.removeChild(this.options, option);
-      break;
+      return option;
     }
-    child = child.nextSibling;
+    option = option.nextSibling;
   }
+  return null;
 };
 
 
