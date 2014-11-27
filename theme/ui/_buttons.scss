@@ -1,0 +1,49 @@
+
+.ui_edit_button {
+  cursor: pointer;
+  background: url(img/ui/edit_button.png) 50% 50% no-repeat transparent;
+  &:hover {
+    background-color: $bg_color;
+  }
+}
+
+.ui_remove_button {
+  cursor: pointer;
+  background: url(img/ui/remove_button.png) 50% 50% no-repeat transparent;
+  &:hover {
+    background-color: $bg_color;
+  }
+}
+
+.ui_minimize_button {
+  cursor: pointer;
+  background: url(img/ui/minimize_button.png) 50% 50% no-repeat transparent;
+  &:hover {
+    background-color: $bg_color;
+  }
+}
+
+.ui_button {
+  font-size: 14px;
+  font-family: $sans_serif_font_family;
+  padding: 8px 16px;
+  margin-right: 4px;
+  background-color: #e3e3e3;
+  color: #3d3d3d;
+  cursor: pointer;
+  @include noselect();
+
+  &:hover {
+    background-color: #ade0e0;
+  }
+  &:active {
+    background-color: #009999;
+    color: #fff;
+    cursor: default;
+  }
+}
+
+.form_buttons {
+  overflow: hidden;
+  margin-bottom: 16px;
+}

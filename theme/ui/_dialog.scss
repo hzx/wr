@@ -1,4 +1,5 @@
 @import "css3";
+@import "ui/buttons";
 
 .ui_dialog {
   position: absolute;
@@ -42,7 +43,7 @@
   height: 24px;
   top: 4px;
   right: 4px;
-  background-color: $bg_color;
+  @extend .ui_remove_button;
 }
 
 .ui_dialog_title {
