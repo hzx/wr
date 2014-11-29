@@ -215,6 +215,11 @@ wr.Collection.prototype.remove = function(id) {
 };
 
 
+wr.Collection.prototype.empty = function() {
+  this.reset([]);
+};
+
+
 wr.Collection.prototype.moveLocal = function(id, beforeId) {
   this.sync = false;
   this.move(id, beforeId);
