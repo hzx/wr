@@ -32,6 +32,7 @@ ui.Edit.prototype.create = function() {
   this.events = [
     [this.node, "click", wr.bind(this, this.onClick)],
     [this.input, "keyup", wr.bind(this, this.onInputKeyup)],
+    [this.input, "change", wr.bind(this, this.onChange)],
     [this.input, "focus", wr.bind(this, this.onInputFocus)],
     [this.input, "blur", wr.bind(this, this.onInputBlur)]
   ];
@@ -129,6 +130,10 @@ ui.Edit.prototype.onInputKeyup = function(e) {
   if (e.keyCode === 27) {
     this.clear();
   }
+};
+
+
+ui.Edit.prototype.onChange = function(e) {
   this.validateChange();
 };
 
