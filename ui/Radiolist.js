@@ -96,9 +96,7 @@ ui.Radiolist.prototype.remove = function(id) {
 
 ui.Radiolist.prototype.updateId = function(old, id) {
   var option = this.get(old);
-  if (option) {
-    option.optionId = id;
-  }
+  if (option) option.optionId = id;
 };
 
 
@@ -111,6 +109,11 @@ ui.Radiolist.prototype.get = function(id) {
     option = option.nextSibling;
   }
   return null;
+};
+
+
+ui.Radiolist.prototype.getSelected = function() {
+  return this.last ? this.last.optionId : null;
 };
 
 

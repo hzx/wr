@@ -77,9 +77,13 @@ wr.Sync.prototype.onInsert = function(obj, beforeId) {
   if (!this.collection.sync) return;
 
   var data = {};
-  data[wr.SYNC_OP] = wr.SYNC_OP_INSERT;
+  if (beforeId) {
+    data[wr.SYNC_OP] = wr.SYNC_OP_INSERT;
+    data[wr.SYNC_BEFOREID] = beforeId;
+  } else {
+    data[wr.SYNC_OP] = wr.SYNC_OP_APPEND;
+  }
   data[wr.SYNC_NAME] = this.name;
-  data[wr.SYNC_BEFOREID] = beforeId;
   data[wr.SYNC_OBJ] = this.collection.serialize(obj);
 
   var me = this;

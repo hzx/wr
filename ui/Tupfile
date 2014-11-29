@@ -11,9 +11,11 @@ Gallery.js\
 GalleryEdit.js\
 Slider.js\
 Combobox.js\
+ComboboxWidget.js\
 Checkbox.js\
 Checklist.js\
 Radiolist.js\
+RadiolistWidget.js\
 Calendar.js\
 Progressbar.js\
 Scrollbar.js\

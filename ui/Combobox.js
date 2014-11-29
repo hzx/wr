@@ -126,26 +126,24 @@ ui.Combobox.prototype.addOptionElement = function(id, text) {
 
 
 ui.Combobox.prototype.remove = function(id) {
-  var option = this.options.firstChild;
-  while (option) {
-    if (option.optionId === id) {
-      if (this.isEnter) {
-        wr.unlisten(option, "click", this.meOptionClick);
+  var option = this.get(id);
+  if (option) {
+    if (this.isEnter) wr.unlisten(option, "click", this.meOptionClick);
+    wr.removeChild(this.options, option);
+
+    for (var i = 0, length = this.storeOptions.length; i < length; ++i) {
+      if (this.storeOptions[i][0] === id) {
+        this.storeOptions.splice(i, 1);
+        break;
       }
-
-      wr.removeChild(this.options, option);
-
-      for (var i = 0, length = this.storeOptions.length; i < length; ++i) {
-        if (this.storeOptions[i][0] === id) {
-          this.storeOptions.splice(i, 1);
-          break;
-        }
-      }
-
-      break;
     }
-    child = child.nextSibling;
   }
+};
+
+
+ui.Combobox.prototype.updateId = function(old, id) {
+  var option = this.get(old);
+  if (option) option.optionId = id;
 };
 
 
@@ -166,7 +164,7 @@ ui.Combobox.prototype.empty = function() {
 };
 
 
-ui.Combobox.prototype.getOption = function(id) {
+ui.Combobox.prototype.get = function(id) {
   var child = this.options.firstChild;
 
   while (child) {
@@ -175,6 +173,11 @@ ui.Combobox.prototype.getOption = function(id) {
   }
 
   return null;
+};
+
+
+ui.Combobox.prototype.getSelected = function() {
+  return this.last ? this.last.optionId : null;
 };
 
 
@@ -199,7 +202,7 @@ ui.Combobox.prototype.fillOptions = function(options) {
 };
 
 
-ui.Combobox.prototype.updateOption = function(id, text) {
+ui.Combobox.prototype.updateText = function(id, text) {
   for (var i = 0, length = this.storeOptions.length; i < length; ++i) {
     if (this.storeOptions[i][0] === id) {
       this.storeOptions[i][1] = text;
