@@ -28,14 +28,13 @@ ui.ComboboxWidget.prototype.exit = function() {
 };
 
 
-ui.ComboboxWidget.prototype.changeId = function(old, id) {
+ui.ComboboxWidget.prototype.updateId = function(old, id) {
   this.node.updateId(old, id);
 };
 
 
-ui.ComboboxWidget.prototype.update = function(params) {
-  if (this.nameCode in params)
-    this.node.updateText(params[this.idCode], params[this.nameCode]);
+ui.ComboboxWidget.prototype.update = function(id, params) {
+  this.node.updateText(id, params[this.nameCode]);
 };
 
 

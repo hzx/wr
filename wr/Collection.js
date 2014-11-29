@@ -8,7 +8,7 @@ wr.Collection = function(model) {
   this.objs = {};
   this.ids = [];
 
-  this.eventIdChange = new wr.Event();
+  this.eventIdUpdate = new wr.Event();
   this.eventUpdate = new wr.Event();
   this.eventReset = new wr.Event();
   this.eventInsert = new wr.Event();
@@ -77,7 +77,7 @@ wr.Collection.prototype.updateId = function(old, id) {
     }
   }
 
-  this.eventIdChange.notify2(old, id);
+  this.eventIdUpdate.notify2(old, id);
 };
 
 
@@ -89,10 +89,17 @@ wr.Collection.prototype.updateLocal = function(id, params) {
 
 
 wr.Collection.prototype.update = function(id, params) {
+  // check collection have object with id
   var obj = this.objs[id];
   if (!obj) return;
 
-  var updates = {"1": id};
+  // updateId, check id in params
+  if ("1" in params) {
+    this.updateId(id, params[1]);
+    id = params[1]; // replace old id with new id from params
+  }
+
+  var updates = {};
   var value;
   var isUpdate = false;
 
@@ -105,7 +112,7 @@ wr.Collection.prototype.update = function(id, params) {
     }
   }
 
-  if (isUpdate) this.eventUpdate.notify(updates);
+  if (isUpdate) this.eventUpdate.notify2(id, updates);
 };
 
 

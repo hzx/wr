@@ -85,7 +85,7 @@ wr.Widget.prototype.insertElement = function(element, beforeId) {
 };
 
 
-wr.Widget.prototype.changeId = function(old, id) {
+wr.Widget.prototype.updateId = function(old, id) {
   // update id in elements
   var element = this.elements[old];
   if (!element) return;
@@ -97,7 +97,7 @@ wr.Widget.prototype.changeId = function(old, id) {
 };
 
 
-wr.Widget.prototype.update = function(params) {
+wr.Widget.prototype.update = function(id, params) {
   wr.log("override Widget.update");
 };
 

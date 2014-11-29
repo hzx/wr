@@ -27,6 +27,7 @@ ui.Textarea.prototype.create = function() {
   this.events = [
     [this.node, "click", wr.bind(this, this.onClick)],
     [this.input, "keyup", wr.bind(this, this.onInputKeyup)],
+    [this.input, "change", wr.bind(this, this.onInputChange)],
     [this.input, "focus", wr.bind(this, this.onInputFocus)],
     [this.input, "blur", wr.bind(this, this.onInputBlur)]
   ];
@@ -105,13 +106,26 @@ ui.Textarea.prototype.onInputKeyup = function(e) {
     return;
   }
 
-  var value = wr.trimString(this.input.value);
 
   if (e.keyCode === 8 || e.keyCode === 46) { // backspace or delete
     this.shrinkHeight();
   } else {
     this.tuneHeight();
   }
+
+  var value = wr.trimString(this.input.value);
+
+  if (this.value !== value) {
+    var old = this.value;
+    this.value = value;
+
+    this.eventChange.notify2(old, value);
+  }
+};
+
+
+ui.Textarea.prototype.onInputChange = function(e) {
+  var value = wr.trimString(this.input.value);
 
   if (this.value !== value) {
     var old = this.value;

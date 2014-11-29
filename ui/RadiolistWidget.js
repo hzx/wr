@@ -33,14 +33,13 @@ ui.RadiolistWidget.prototype.createItem = function() {
 };
 
 
-ui.RadiolistWidget.prototype.changeId = function(old, id) {
+ui.RadiolistWidget.prototype.updateId = function(old, id) {
   this.node.updateId(old, id);
 };
 
 
-ui.RadiolistWidget.prototype.update = function(params) {
-  if (this.nameCode in params)
-    this.node.updateText(obj[this.idCode], obj[this.nameCode]);
+ui.RadiolistWidget.prototype.update = function(id) {
+  this.node.updateText(id, obj[this.nameCode]);
 };
 
 

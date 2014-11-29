@@ -5,7 +5,7 @@ wr.Container = function(collection, widget) {
   this.collection = collection;
   this.widget = widget;
 
-  this.meIdChange = wr.bind(this, this.onIdChange);
+  this.meIdUpdate = wr.bind(this, this.onIdUpdate);
   this.meUpdate = wr.bind(this, this.onUpdate);
   this.meReset = wr.bind(this, this.onReset);
   this.meInsert = wr.bind(this, this.onInsert);
@@ -16,7 +16,7 @@ wr.Container = function(collection, widget) {
 
 
 wr.Container.prototype.enter = function() {
-  this.collection.eventIdChange.listen(this.meIdChange);
+  this.collection.eventIdUpdate.listen(this.meIdUpdate);
   this.collection.eventUpdate.listen(this.meUpdate);
   this.collection.eventReset.listen(this.meReset);
   this.collection.eventInsert.listen(this.meInsert);
@@ -27,7 +27,7 @@ wr.Container.prototype.enter = function() {
 
 
 wr.Container.prototype.exit = function() {
-  this.collection.eventIdChange.unlisten(this.meIdChange);
+  this.collection.eventIdUpdate.unlisten(this.meIdUpdate);
   this.collection.eventUpdate.unlisten(this.meUpdate);
   this.collection.eventReset.unlisten(this.meReset);
   this.collection.eventInsert.unlisten(this.meInsert);
@@ -37,13 +37,13 @@ wr.Container.prototype.exit = function() {
 };
 
 
-wr.Container.prototype.onIdChange = function(old, id) {
-  this.widget.changeId(old, id);
+wr.Container.prototype.onIdUpdate = function(old, id) {
+  this.widget.updateId(old, id);
 };
 
 
-wr.Container.prototype.onUpdate = function(params) {
-  this.widget.update(params);
+wr.Container.prototype.onUpdate = function(id, params) {
+  this.widget.update(id, params);
 };
 
 

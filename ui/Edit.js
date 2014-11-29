@@ -130,6 +130,8 @@ ui.Edit.prototype.onInputKeyup = function(e) {
   if (e.keyCode === 27) {
     this.clear();
   }
+
+  this.validateChange();
 };
 
 

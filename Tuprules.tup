@@ -20,6 +20,7 @@ Logger.js\
 Value.js\
 Model.js\
 Collection.js\
+QueryCollection.js\
 Entity.js\
 View.js\
 Widget.js\
