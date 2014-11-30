@@ -55,7 +55,7 @@ wr.QueryCollection.prototype.compare = function(a, b) {
 
 wr.QueryCollection.prototype.onIdUpdate = function(old, id) {
   var obj = this.get(old);
-  if (this.query(obj)) this.updateId(old, id);
+  if (obj && this.query(obj)) this.updateId(old, id);
 };
 
 
