@@ -162,6 +162,7 @@ ui.Combobox.prototype.emptyOptions = function() {
     child = next;
   }
 
+  this.collapse();
   this.reset();
 };
 
