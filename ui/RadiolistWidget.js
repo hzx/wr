@@ -33,6 +33,11 @@ ui.RadiolistWidget.prototype.createItem = function() {
 };
 
 
+ui.RadiolistWidget.prototype.empty = function() {
+  this.node.empty();
+};
+
+
 ui.RadiolistWidget.prototype.updateId = function(old, id) {
   this.node.updateId(old, id);
 };

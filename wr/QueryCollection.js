@@ -48,6 +48,11 @@ wr.QueryCollection.prototype.sort = function(objs) {
 };
 
 
+wr.QueryCollection.prototype.compare = function(a, b) {
+  return true;
+};
+
+
 wr.QueryCollection.prototype.onIdUpdate = function(old, id) {
   var obj = this.get(old);
   if (this.query(obj)) this.updateId(old, id);
@@ -79,9 +84,21 @@ wr.QueryCollection.prototype.onInsert = function(obj, beforeId) {
 
 
 wr.QueryCollection.prototype.onAppend = function(obj) {
-  wr.log("onAppend:");
-  wr.log(obj);
-  if (this.query(obj)) this.append(obj);
+  var me = this;
+  var done = false;
+
+  if (this.query(obj)) {
+    this.forEach(function(o) {
+      if (!me.compare(o, obj)) {
+        done = true;
+        me.insert(obj, o[1]);
+      }
+    });
+
+    if (!done) this.insert(obj, null);
+  }
+  
+  // if (this.query(obj)) this.append(obj);
 };
 
 

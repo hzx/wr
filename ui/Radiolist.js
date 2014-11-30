@@ -77,6 +77,26 @@ ui.Radiolist.prototype.add = function(id, text) {
 };
 
 
+ui.Radiolist.prototype.empty = function() {
+  var child = this.options.firstChild;
+  var next;
+
+  while (child) {
+    next = child.nextSibling;
+
+    if (this.isEnter) {
+      wr.unlisten(child, "click", this.meOptionClick);
+    }
+
+    wr.removeChild(this.options, child);
+
+    child = next;
+  }
+
+  this.reset();
+};
+
+
 ui.Radiolist.prototype.updateText = function(id, text) {
   var option = this.get(id);
   if (option) wr.setText(option, text);

@@ -147,9 +147,10 @@ ui.Combobox.prototype.updateId = function(old, id) {
 };
 
 
-ui.Combobox.prototype.empty = function() {
+ui.Combobox.prototype.emptyOptions = function() {
   var child = this.options.firstChild;
   var next;
+
   while (child) {
     next = child.nextSibling;
 
@@ -158,11 +159,16 @@ ui.Combobox.prototype.empty = function() {
     }
 
     wr.removeChild(this.options, child);
-
     child = next;
   }
 
   this.reset();
+};
+
+
+ui.Combobox.prototype.empty = function() {
+  this.storeOptions = [];
+  this.emptyOptions();
 };
 
 
@@ -261,15 +267,21 @@ ui.Combobox.prototype.expand = function() {
 ui.Combobox.prototype.filter = function() {
   var value = this.editValue.toLowerCase();
 
-  this.empty();
+  this.emptyOptions();
 
   if (value.length === 0) {
     this.fillOptions(this.storeOptions);
   } else {
-
+    // fill filtered options from storeOptions
+    var words;
     for (var i = 0, length = this.storeOptions.length; i < length; ++i) {
-      if (wr.stringStartsWith(this.storeOptions[i][1].toLowerCase(), value)) {
-        this.addOptionElement(this.storeOptions[i][0], this.storeOptions[i][1]);
+      // split text by words and compare with every word
+      words = this.storeOptions[i][1].toLowerCase().split(' ');
+      for (var w = 0, wlength = words.length; w < wlength; ++w) {
+        if (wr.stringStartsWith(words[w], value)) {
+          this.addOptionElement(this.storeOptions[i][0], this.storeOptions[i][1]);
+          break;
+        }
       }
     }
   }
