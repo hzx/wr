@@ -48,26 +48,29 @@ wr.Sync.prototype.exit = function() {
 };
 
 
-wr.Sync.prototype.onUpdate = function(params) {
+wr.Sync.prototype.onUpdate = function(id, params) {
   if (!this.collection.sync) return;
 
   var data = {};
   data[wr.SYNC_OP] = wr.SYNC_OP_UPDATE;
   data[wr.SYNC_NAME] = this.name;
+  data[wr.SYNC_ID] = id;
   data[wr.SYNC_PARAMS] = this.collection.serialize(params);
 
   var me = this;
 
   wr.post(this.url, data, world.xsrf, function(response) { // success
+    var params = me.collection.unserialize(response);
+    me.collection.updateLocal(id, params);
     // update additional fields
-    var rows = response.split(wr.DELIM_ROW);
-    var id = rows[0];
-    var fields = rows[1];
-    var updates = {};
-    for (var i = 0, length = fields.length; i < length; i += 2) {
-      updates[fields[i]] = fields[i+1];
-    }
-    me.collection.update(id, updates);
+    // var rows = response.split(wr.DELIM_ROW);
+    // var id = rows[0];
+    // var fields = rows[1];
+    // var updates = {};
+    // for (var i = 0, length = fields.length; i < length; i += 2) {
+    //   updates[fields[i]] = fields[i+1];
+    // }
+    // me.collection.update(id, updates);
   }, function(status, response) { // fail
   });
 };
@@ -89,9 +92,11 @@ wr.Sync.prototype.onInsert = function(obj, beforeId) {
   var me = this;
 
   wr.post(this.url, data, world.xsrf, function(response) { // success
+    var params = me.collection.unserialize(response);
+    me.collection.updateLocal(obj[1], params);
     // update id
-    var ids = response.split(wr.DELIM_FIELD);
-    me.collection.updateId(ids[0], ids[1]);
+    // var ids = response.split(wr.DELIM_FIELD);
+    // me.collection.updateId(ids[0], ids[1]);
   }, function(status, response) { // fail
   });
 };
@@ -108,9 +113,11 @@ wr.Sync.prototype.onAppend = function(obj) {
   var me = this;
 
   wr.post(this.url, data, world.xsrf, function(response) { // success
+    var params = me.collection.unserialize(response);
+    me.collection.updateLocal(obj[1], params);
     // update id
-    var ids = response.split(wr.DELIM_FIELD);
-    me.collection.updateId(ids[0], ids[1]);
+    // var ids = response.split(wr.DELIM_FIELD);
+    // me.collection.updateId(ids[0], ids[1]);
   }, function(status, response) { // fail
   });
 };
