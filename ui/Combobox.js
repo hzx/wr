@@ -161,6 +161,8 @@ ui.Combobox.prototype.empty = function() {
 
     child = next;
   }
+
+  this.reset();
 };
 
 

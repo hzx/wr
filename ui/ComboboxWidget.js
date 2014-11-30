@@ -33,6 +33,11 @@ ui.ComboboxWidget.prototype.updateId = function(old, id) {
 };
 
 
+ui.ComboboxWidget.prototype.empty = function() {
+  this.node.empty();
+};
+
+
 ui.ComboboxWidget.prototype.update = function(id, params) {
   this.node.updateText(id, params[this.nameCode]);
 };

@@ -1,8 +1,8 @@
 
-wr.QueryCollection = function() {
+wr.QueryCollection = function(parentCollection) {
   wr.QueryCollection.base.constructor.call(this);
 
-  this.parentCollection = null; // for local collection
+  this.parentCollection = parentCollection;
 
   this.meIdUpdate = wr.bind(this, this.onIdUpdate);
   this.meUpdate = wr.bind(this, this.onUpdate);
@@ -15,9 +15,36 @@ wr.QueryCollection = function() {
 wr.inherit(wr.QueryCollection, wr.Collection);
 
 
+wr.QueryCollection.prototype.enter = function() {
+  this.parentCollection.eventIdUpdate.listen(this.meIdUpdate);
+  this.parentCollection.eventUpdate.listen(this.meUpdate);
+  this.parentCollection.eventReset.listen(this.meReset);
+  this.parentCollection.eventInsert.listen(this.meInsert);
+  this.parentCollection.eventAppend.listen(this.meAppend);
+  this.parentCollection.eventRemove.listen(this.meRemove);
+  this.parentCollection.eventMove.listen(this.meMove);
+};
+
+
+wr.QueryCollection.prototype.exit = function() {
+  this.parentCollection.eventIdUpdate.unlisten(this.meIdUpdate);
+  this.parentCollection.eventUpdate.unlisten(this.meUpdate);
+  this.parentCollection.eventReset.unlisten(this.meReset);
+  this.parentCollection.eventInsert.unlisten(this.meInsert);
+  this.parentCollection.eventAppend.unlisten(this.meAppend);
+  this.parentCollection.eventRemove.unlisten(this.meRemove);
+  this.parentCollection.eventMove.unlisten(this.meMove);
+};
+
+
 // method query obj for select
 wr.QueryCollection.prototype.query = function(obj) {
   wr.log("override QueryCollection.query");
+};
+
+
+wr.QueryCollection.prototype.sort = function(objs) {
+  wr.log("override QueryCollection.sort");
 };
 
 
@@ -34,7 +61,15 @@ wr.QueryCollection.prototype.onUpdate = function(id, params) {
 
 
 wr.QueryCollection.prototype.onReset = function() {
-  this.query();
+  var me = this;
+  var objs = [];
+
+  this.parentCollection.forEach(function(obj) {
+    if (me.query(obj)) objs.push(obj);
+  });
+
+  this.sort(objs);
+  this.reset(objs);
 };
 
 
@@ -44,6 +79,8 @@ wr.QueryCollection.prototype.onInsert = function(obj, beforeId) {
 
 
 wr.QueryCollection.prototype.onAppend = function(obj) {
+  wr.log("onAppend:");
+  wr.log(obj);
   if (this.query(obj)) this.append(obj);
 };
 

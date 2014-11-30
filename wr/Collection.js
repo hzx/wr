@@ -53,7 +53,8 @@ wr.Collection.prototype.reset = function(objs) {
       continue;
     }
 
-    this.objs[id] = this.unserialize(obj);
+    // this.objs[id] = this.unserialize(obj);
+    this.objs[id] = obj;
     this.ids.push(id);
   }
 

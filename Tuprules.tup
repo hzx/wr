@@ -4,6 +4,7 @@ IC = python $HOME/bin/image64.py
 
 WR_SRC = \
 base.js\
+algorithms.js\
 Hasher.js\
 utils.js\
 datetime.js\
