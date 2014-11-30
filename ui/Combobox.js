@@ -128,6 +128,8 @@ ui.Combobox.prototype.addOptionElement = function(id, text) {
 ui.Combobox.prototype.remove = function(id) {
   var option = this.get(id);
   if (option) {
+    // reset selected option
+    if (option === this.last) this.reset();
     if (this.isEnter) wr.unlisten(option, "click", this.meOptionClick);
     wr.removeChild(this.options, option);
 

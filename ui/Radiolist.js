@@ -106,6 +106,8 @@ ui.Radiolist.prototype.updateText = function(id, text) {
 ui.Radiolist.prototype.remove = function(id) {
   var option = this.get(id);
   if (option) {
+    // reset selected option
+    if (option === this.last) this.reset();
     if (this.isEnter) {
       wr.unlisten(option, "click", this.meOptionClick);
     }
