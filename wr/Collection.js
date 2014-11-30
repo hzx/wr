@@ -92,7 +92,7 @@ wr.Collection.prototype.updateLocal = function(id, params) {
 wr.Collection.prototype.update = function(id, params) {
   // check collection have object with id
   var obj = this.objs[id];
-  if (!obj) return;
+  if (!obj || wr.isEmpty(params)) return;
 
   // updateId, check id in params
   if ("1" in params) {
@@ -102,18 +102,16 @@ wr.Collection.prototype.update = function(id, params) {
 
   var updates = {};
   var value;
-  var isUpdate = false;
 
   for (var name in params) {
-    var value = this.unserializeValue(name, params[name]);
+    value = this.unserializeValue(name, params[name]);
     if (obj[name] !== value) {
-      isUpdate = true;
       obj[name] = value;
       updates[name] = value;
     }
   }
 
-  if (isUpdate) this.eventUpdate.notify2(id, updates);
+  if (wr.isEmpty(updates)) this.eventUpdate.notify2(id, updates);
 };
 
 
