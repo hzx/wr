@@ -274,6 +274,25 @@ wr.Collection.prototype.forEach = function(fn) {
 };
 
 
+// filter objs by fn
+wr.Collection.prototype.filter = function(fn) {
+  var ids = [];
+  var obj;
+
+  // collecti !fn ids for remove
+  for (var i = 0, length = this.ids.length; i < length; ++i) {
+    obj = this.objs[this.ids[i]];
+    if (!fn(obj)) ids.push(obj[1]);
+  }
+
+  wr.log("Collection.filter:");
+  wr.log(ids);
+
+  for (var r = 0, length = ids.length; r < length; ++r)
+    this.remove(ids[r]);
+};
+
+
 // get next object relative to current object id
 wr.Collection.prototype.next = function(id) {
   if (id in this.objs) {
