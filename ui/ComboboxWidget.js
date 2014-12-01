@@ -1,6 +1,6 @@
 
-ui.ComboboxWidget = function() {
-  ui.ComboboxWidget.base.constructor.call(this);
+ui.ComboboxWidget = function(collection) {
+  ui.ComboboxWidget.base.constructor.call(this, collection);
 
   this.idCode = 1;
   this.nameCode = 2;

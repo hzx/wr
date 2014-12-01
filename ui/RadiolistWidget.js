@@ -1,6 +1,6 @@
 
-ui.RadiolistWidget = function() {
-  ui.RadiolistWidget.base.constructor.call(this);
+ui.RadiolistWidget = function(collection) {
+  ui.RadiolistWidget.base.constructor.call(this, collection);
 
   this.idCode = 1;
   this.nameCode = 2;

@@ -9,3 +9,12 @@ ui.create = function(cl, params) {
   control.create();
   return control;
 };
+
+ui.widget = function(cl, coll, params) {
+  var w = new cl(coll);
+  for (var name in params) {
+    w[name] = params[name];
+  }
+  w.create();
+  return w;
+};
