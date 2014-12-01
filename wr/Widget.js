@@ -1,11 +1,21 @@
 
-wr.Widget = function() {
+// TODO: fusion Widget and Container
+wr.Widget = function(collection) {
   wr.Widget.base.constructor.call(this);
 
   this.userClass = "";
 
   this.elements = {};
-  this.container = null;
+  this.collection = collection;
+
+  // collection events
+  this.meIdUpdate = wr.bind(this, this.onIdUpdate);
+  this.meUpdate = wr.bind(this, this.onUpdate);
+  this.meReset = wr.bind(this, this.onReset);
+  this.meInsert = wr.bind(this, this.onInsert);
+  this.meAppend = wr.bind(this, this.onAppend);
+  this.meRemove = wr.bind(this, this.onRemove);
+  this.meMove = wr.bind(this, this.onMove);
 };
 wr.inherit(wr.Widget, wr.View);
 
@@ -24,6 +34,14 @@ wr.Widget.prototype.createItem = function(obj) {
 wr.Widget.prototype.enter = function() {
   wr.Widget.base.enter.call(this);
 
+  this.collection.eventIdUpdate.listen(this.meIdUpdate);
+  this.collection.eventUpdate.listen(this.meUpdate);
+  this.collection.eventReset.listen(this.meReset);
+  this.collection.eventInsert.listen(this.meInsert);
+  this.collection.eventAppend.listen(this.meAppend);
+  this.collection.eventRemove.listen(this.meRemove);
+  this.collection.eventMove.listen(this.meMove);
+
   for (var id in this.elements) {
     this.listenItem(this.elements[id]);
   }
@@ -32,6 +50,14 @@ wr.Widget.prototype.enter = function() {
 
 wr.Widget.prototype.exit = function() {
   wr.Widget.base.exit.call(this);
+
+  this.collection.eventIdUpdate.unlisten(this.meIdUpdate);
+  this.collection.eventUpdate.unlisten(this.meUpdate);
+  this.collection.eventReset.unlisten(this.meReset);
+  this.collection.eventInsert.unlisten(this.meInsert);
+  this.collection.eventAppend.unlisten(this.meAppend);
+  this.collection.eventRemove.unlisten(this.meRemove);
+  this.collection.eventMove.unlisten(this.meMove);
 
   for (var id in this.elements) {
     this.unlistenItem(this.elements[id]);
@@ -139,4 +165,44 @@ wr.Widget.prototype.move = function(id, beforeId) {
   this.removeElement(element);
 
   this.insertElement(element, beforeId);
+};
+
+
+wr.Widget.prototype.onIdUpdate = function(old, id) {
+  this.updateId(old, id);
+};
+
+
+wr.Widget.prototype.onUpdate = function(id, params) {
+  this.update(id, params);
+};
+
+
+wr.Widget.prototype.onReset = function() {
+  this.empty();
+
+  var me = this;
+  this.collection.forEach(function(obj) {
+    me.append(obj);
+  });
+};
+
+
+wr.Widget.prototype.onInsert = function(obj, beforeId) {
+  this.insert(obj, beforeId);
+};
+
+
+wr.Widget.prototype.onAppend = function(obj) {
+  this.append(obj);
+};
+
+
+wr.Widget.prototype.onRemove = function(id) {
+  this.remove(id);
+};
+
+
+wr.Widget.prototype.onMove = function(id, beforeId) {
+  this.move(id, beforeId);
 };
