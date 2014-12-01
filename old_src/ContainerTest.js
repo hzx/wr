@@ -1,2 +1,0 @@
-
-ContainerTest = TestCase("ContainerTest");

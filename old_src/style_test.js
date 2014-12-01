@@ -1,2 +1,0 @@
-
-StyleTest = TestCase("StyleTest");
