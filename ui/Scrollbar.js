@@ -1,9 +1,7 @@
 
 ui.Scrollbar = function() {
-  wr.construct(ui.Scrollbar, this);
+  ui.Scrollbar.base.constructor.call(this);
 };
-
-
 wr.inherit(ui.Scrollbar, wr.View);
 
 

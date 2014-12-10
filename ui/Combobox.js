@@ -1,6 +1,6 @@
 
 ui.Combobox = function() {
-  wr.construct(ui.Combobox, this);
+  ui.Combobox.base.constructor.call(this);
 
   // for user, init before create
   this.userClass = "";
@@ -16,8 +16,6 @@ ui.Combobox = function() {
 
   this.meOptionClick = wr.bind(this, this.onOptionClick);
 };
-
-
 wr.inherit(ui.Combobox, wr.View);
 
 

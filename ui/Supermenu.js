@@ -1,10 +1,7 @@
 
 ui.Supermenu = function() {
-  // ui.Supermenu.base.constructor.call(this);
-  wr.construct(ui.Supermenu, this);
+  ui.Supermenu.base.constructor.call(this);
 };
-
-
 wr.inherit(ui.Supermenu, wr.View);
 
 

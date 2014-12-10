@@ -1,6 +1,6 @@
 
 ui.Upload = function() {
-  wr.construct(ui.Upload, this);
+  ui.Upload.base.constructor.call(this);
 
   // user data to fill
   this.userClass = "";
@@ -11,8 +11,6 @@ ui.Upload = function() {
 
   this.eventChange = new wr.Event();
 };
-
-
 wr.inherit(ui.Upload, wr.View);
 
 

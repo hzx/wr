@@ -1,9 +1,7 @@
 
 ui.Calendar = function() {
-  wr.construct(ui.Calendar, this);
+  ui.Calendar.base.constructor.call(this);
 };
-
-
 wr.inherit(ui.Calendar, wr.View);
 
 

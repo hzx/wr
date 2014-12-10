@@ -1,6 +1,6 @@
 
 ui.Edit = function() {
-  wr.construct(ui.Edit, this);
+  ui.Edit.base.constructor.call(this);
 
   this.value = "";
   this.userClass = "";
@@ -10,8 +10,6 @@ ui.Edit = function() {
 
   this.eventChange = new wr.Event();
 };
-
-
 wr.inherit(ui.Edit, wr.View);
 
 

@@ -1,6 +1,6 @@
 
 ui.Textarea = function() {
-  wr.construct(ui.Textarea, this);
+  ui.Textarea.base.constructor.call(this);
 
   this.value = "";
   this.userClass = "";
@@ -8,8 +8,6 @@ ui.Textarea = function() {
   this.eventChange = new wr.Event();
   this.eventBlur = new wr.Event();
 };
-
-
 wr.inherit(ui.Textarea, wr.View);
 
 

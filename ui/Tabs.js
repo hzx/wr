@@ -1,14 +1,12 @@
 
 ui.Tabs = function() {
-  wr.construct(ui.Tabs, this);
+  ui.Tabs.base.constructor.call(this);
 
   this.store = {};
 
   this.active = null;
   this.meHeaderClick = wr.bind(this, this.onHeaderClick);
 };
-
-
 wr.inherit(ui.Tabs, wr.View);
 
 

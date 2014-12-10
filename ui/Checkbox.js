@@ -1,9 +1,7 @@
 
 ui.Checkbox = function() {
-  wr.construct(ui.Checkbox, this);
+  ui.Checkbox.base.constructor.call(this);
 };
-
-
 wr.inherit(ui.Checkbox, wr.View);
 
 

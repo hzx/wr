@@ -1,11 +1,9 @@
 
 ui.Hint = function(userClass) {
-  wr.construct(ui.Hint, this);
+  ui.Hint.base.constructor.call(this);
 
   this.userClass = userClass;
 };
-
-
 wr.inherit(ui.Hint, wr.View);
 
 

@@ -1,9 +1,7 @@
 
 ui.Checklist = function() {
-  wr.construct(ui.Checklist, this);
+  ui.Checklist.base.constructor.call(this);
 };
-
-
 wr.inherit(ui.Checklist, wr.View);
 
 

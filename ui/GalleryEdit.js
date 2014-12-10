@@ -1,6 +1,6 @@
 
 ui.GalleryEdit = function() {
-  wr.construct(ui.GalleryEdit, this);
+  ui.GalleryEdit.base.constructor.call(this);
 
   this.userClass = "";
 
@@ -8,8 +8,6 @@ ui.GalleryEdit = function() {
 
   this.meAdd = wr.bind(this, this.onAdd);
 };
-
-
 wr.inherit(ui.GalleryEdit, wr.View);
 
 

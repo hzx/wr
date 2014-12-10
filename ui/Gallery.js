@@ -1,11 +1,9 @@
 
 ui.Gallery = function() {
-  wr.construct(ui.Gallery, this);
+  ui.Gallery.base.constructor.call(this);
 
   this.isFullscreen = false;
 };
-
-
 wr.inherit(ui.Gallery, wr.View);
 
 

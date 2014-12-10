@@ -1,6 +1,6 @@
 
 ui.Radiolist = function() {
-  wr.construct(ui.Radiolist, this);
+  ui.Radiolist.base.constructor.call(this);
 
   // for user, init before create
   this.userClass = "";
@@ -13,8 +13,6 @@ ui.Radiolist = function() {
 
   this.meOptionClick = wr.bind(this, this.onOptionClick);
 };
-
-
 wr.inherit(ui.Radiolist, wr.View);
 
 

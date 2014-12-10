@@ -1,9 +1,7 @@
 
 ui.Progressbar = function() {
-  wr.construct(ui.Progressbar, this);
+  ui.Progressbar.base.constructor.call(this);
 };
-
-
 wr.inherit(ui.Progressbar, wr.View);
 
 

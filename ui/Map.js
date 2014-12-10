@@ -1,6 +1,6 @@
 
 ui.Map = function() {
-  wr.construct(ui.Map, this);
+  ui.Map.base.constructor.call(this);
 
   // for user, init before create
   this.userClass = "";
@@ -13,8 +13,6 @@ ui.Map = function() {
 
   this.meLoad = wr.bind(this, this.onLoad);
 };
-
-
 wr.inherit(ui.Map, wr.View);
 
 

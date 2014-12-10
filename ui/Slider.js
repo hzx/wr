@@ -1,9 +1,7 @@
 
 ui.Slider = function() {
-  wr.construct(ui.Slider, this);
+  ui.Slider.base.constructor.call(this);
 };
-
-
 wr.inherit(ui.Slider, wr.View);
 
 
