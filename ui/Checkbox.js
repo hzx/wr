@@ -8,7 +8,7 @@ wr.inherit(ui.Checkbox, wr.View);
 
 
 ui.Checkbox.prototype.create = function() {
-  this.node = wr.DIV_c("ui_checkbox");
+  this.node = wr.div_c("ui_checkbox");
 };
 
 

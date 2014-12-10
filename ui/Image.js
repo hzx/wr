@@ -13,7 +13,7 @@ ui.Image.prototype.create = function() {
   this.img = wr.createElement("img");
   this.setSrc(this.src);
 
-  this.node = wr.DIV_cc("ui_image", [
+  this.node = wr.div_cc("ui_image", [
     this.img
   ]);
 

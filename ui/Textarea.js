@@ -18,7 +18,7 @@ ui.Textarea.prototype.create = function() {
   this.input.value = this.value;
   wr.addClass(this.input, "ui_textarea_input");
 
-  this.node = wr.DIV_cc("ui_textarea", [
+  this.node = wr.div_cc("ui_textarea", [
     this.input
   ]);
 

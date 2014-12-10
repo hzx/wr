@@ -48,7 +48,7 @@ ui.Map.init = function() {
 
 
 ui.Map.prototype.create = function() {
-  this.node = wr.DIV_c("ui_map");
+  this.node = wr.div_c("ui_map");
 
   wr.addClass(this.node, this.userClass);
 

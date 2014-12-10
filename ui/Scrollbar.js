@@ -8,7 +8,7 @@ wr.inherit(ui.Scrollbar, wr.View);
 
 
 ui.Scrollbar.prototype.create = function() {
-  this.node = wr.DIV_c("ui_scrollbar");
+  this.node = wr.div_c("ui_scrollbar");
 };
 
 

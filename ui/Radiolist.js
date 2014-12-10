@@ -19,12 +19,12 @@ wr.inherit(ui.Radiolist, wr.View);
 
 
 ui.Radiolist.prototype.create = function() {
-  this.optionDefault = wr.DIV_ct("ui_radiolist_default", this.textDefault);
+  this.optionDefault = wr.div_ct("ui_radiolist_default", this.textDefault);
   this.optionDefault.optionId = this.idDefault;
 
-  this.options = wr.DIV_c("ui_radiolist_options");
+  this.options = wr.div_c("ui_radiolist_options");
   
-  this.node = wr.DIV_cc("ui_radiolist", [
+  this.node = wr.div_cc("ui_radiolist", [
     this.optionDefault,
     this.options
   ]);
@@ -64,7 +64,7 @@ ui.Radiolist.prototype.exit = function() {
 
 
 ui.Radiolist.prototype.add = function(id, text) {
-  var option = wr.DIV_ct("ui_radiolist_option", text);
+  var option = wr.div_ct("ui_radiolist_option", text);
   option.optionId = id;
 
   wr.appendChild(this.options, option);

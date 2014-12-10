@@ -17,13 +17,13 @@ wr.inherit(ui.Upload, wr.View);
 
 
 ui.Upload.prototype.create = function() {
-  this.input = wr.INPUT_c("ui_upload_input");
+  this.input = wr.input_c("ui_upload_input");
   this.input.type = "file";
   this.input.multiple = this.multiple;
 
-  this.text = wr.SPAN_ct("ui_upload_text", this.userText);
+  this.text = wr.span_ct("ui_upload_text", this.userText);
 
-  this.node = wr.DIV_cc("ui_upload", [
+  this.node = wr.div_cc("ui_upload", [
     this.text,
     this.input
   ]);
@@ -42,7 +42,7 @@ ui.Upload.prototype.create = function() {
 // reset selected files
 ui.Upload.prototype.reset = function() {
   // replace input
-  var input = wr.INPUT_c("ui_upload_input");
+  var input = wr.input_c("ui_upload_input");
   input.type = "file";
   input.multiple = this.multiple;
 

@@ -18,15 +18,15 @@ wr.unlistenBunch = function(bunch) {
 };
 
 
-wr.DIV_c = function(className) {
+wr.div_c = function(className) {
   var node = wr.createElement(wr.DIV);
   wr.addClass(node, className);
   return node;
 };
 
 
-wr.DIV_cc = function(className, childs) {
-  var node = wr.DIV_c(className);
+wr.div_cc = function(className, childs) {
+  var node = wr.div_c(className);
   for (var i = 0, length = childs.length; i < length; ++i) {
     wr.appendChild(node, childs[i]);
   }
@@ -34,28 +34,28 @@ wr.DIV_cc = function(className, childs) {
 };
 
 
-wr.DIV_ct = function(className, text) {
-  var node = wr.DIV_c(className);
+wr.div_ct = function(className, text) {
+  var node = wr.div_c(className);
   wr.appendChild(node, wr.createText(text));
   return node;
 };
 
 
-wr.SPAN_c = function(className) {
+wr.span_c = function(className) {
   var node = wr.createElement(wr.SPAN);
   wr.addClass(node, className);
   return node;
 };
 
 
-wr.SPAN_ct = function(className, text) {
-  var node = wr.SPAN_c(className);
+wr.span_ct = function(className, text) {
+  var node = wr.span_c(className);
   wr.appendChild(node, wr.createText(text));
   return node;
 };
 
 
-wr.INPUT_c = function(className) {
+wr.input_c = function(className) {
   var node = wr.createElement("input");
   wr.addClass(node, className);
   return node;

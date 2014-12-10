@@ -21,7 +21,7 @@ wr.inherit(wr.Widget, wr.View);
 
 
 wr.Widget.prototype.create = function() {
-  this.node = wr.DIV_c(this.userClass);
+  this.node = wr.div_c(this.userClass);
 };
 
 

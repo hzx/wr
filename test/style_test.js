@@ -4,7 +4,7 @@ var StyleTest = TestCase("StyleTest");
 
 StyleTest.prototype.setUp = function() {
   wr.init();
-  this.some = wr.DIV_c("some");
+  this.some = wr.div_c("some");
   wr.appendChild(document.body, this.some);
 };
 

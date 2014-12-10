@@ -10,9 +10,9 @@ wr.inherit(ui.Gallery, wr.View);
 
 
 ui.Gallery.prototype.create = function() {
-  this.thumbs = wr.DIV_c("ui_gallery_thumbs");
+  this.thumbs = wr.div_c("ui_gallery_thumbs");
 
-  this.node = wr.DIV_cc("ui_gallery", [
+  this.node = wr.div_cc("ui_gallery", [
     this.thumbs
   ]);
 };

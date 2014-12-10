@@ -9,7 +9,7 @@ wr.inherit(ui.Supermenu, wr.View);
 
 
 ui.Supermenu.prototype.create = function() {
-  this.node = wr.DIV_cc("ui_supermenu", []);
+  this.node = wr.div_cc("ui_supermenu", []);
 };
 
 

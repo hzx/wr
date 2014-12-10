@@ -22,27 +22,27 @@ wr.inherit(ui.Combobox, wr.View);
 
 
 ui.Combobox.prototype.create = function() {
-  this.value = wr.DIV_ct("ui_combobox_value", "");
+  this.value = wr.div_ct("ui_combobox_value", "");
 
-  this.input = wr.INPUT_c("ui_combobox_input");
+  this.input = wr.input_c("ui_combobox_input");
   this.input.type = "text";
-  this.edit = wr.DIV_cc("ui_combobox_edit", [
+  this.edit = wr.div_cc("ui_combobox_edit", [
     this.input
   ]);
 
-  this.optionDefault = wr.DIV_ct("ui_combobox_default", this.textDefault);
+  this.optionDefault = wr.div_ct("ui_combobox_default", this.textDefault);
   this.optionDefault.optionId = this.idDefault;
 
-  this.options = wr.DIV_c("ui_combobox_options");
+  this.options = wr.div_c("ui_combobox_options");
 
-  this.dropdown = wr.DIV_cc("ui_combobox_dropdown", [
+  this.dropdown = wr.div_cc("ui_combobox_dropdown", [
     this.edit,
     this.optionDefault,
     this.options
   ]);
   wr.hide(this.dropdown);
 
-  this.node = wr.DIV_cc("ui_combobox", [
+  this.node = wr.div_cc("ui_combobox", [
     this.value,
     this.dropdown
   ]);
@@ -114,7 +114,7 @@ ui.Combobox.prototype.add = function(id, text) {
 
 
 ui.Combobox.prototype.addOptionElement = function(id, text) {
-  var option = wr.DIV_ct("ui_combobox_option", text);
+  var option = wr.div_ct("ui_combobox_option", text);
   option.optionId = id;
 
   wr.appendChild(this.options, option);

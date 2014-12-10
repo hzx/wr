@@ -13,13 +13,13 @@ wr.inherit(ui.Tabs, wr.View);
 
 
 ui.Tabs.prototype.create = function() {
-  this.headers = wr.DIV_c("");
-  this.content = wr.DIV_c("ui_tabs_content");
+  this.headers = wr.div_c("");
+  this.content = wr.div_c("ui_tabs_content");
 
-  this.node = wr.DIV_cc("ui_tabs", [
-    wr.DIV_cc("ui_tabs_headers", [
+  this.node = wr.div_cc("ui_tabs", [
+    wr.div_cc("ui_tabs_headers", [
       this.headers,
-      wr.DIV_c("ui_tabs_clear")
+      wr.div_c("ui_tabs_clear")
     ]),
     this.content
   ]);
@@ -27,7 +27,7 @@ ui.Tabs.prototype.create = function() {
 
 
 ui.Tabs.prototype.createTab = function(name, content) {
-  var tab = wr.DIV_ct("ui_tabs_tab", name);
+  var tab = wr.div_ct("ui_tabs_tab", name);
   tab.optionId = name;
 
   wr.hide(content);

@@ -11,24 +11,24 @@ wr.inherit(ui.Dialog, wr.View);
 
 
 ui.Dialog.prototype.create = function() {
-  this.buttonClose = wr.DIV_c("ui_dialog_button_close");
+  this.buttonClose = wr.div_c("ui_dialog_button_close");
 
-  this.overlay = wr.DIV_c("ui_dialog_overlay");
+  this.overlay = wr.div_c("ui_dialog_overlay");
   wr.setOpacity(this.overlay, 0.6);
 
-  this.title = wr.DIV_ct("ui_dialog_title", this.titleText);
+  this.title = wr.div_ct("ui_dialog_title", this.titleText);
 
-  this.content = wr.DIV_c("ui_dialog_content", [
+  this.content = wr.div_c("ui_dialog_content", [
   ]);
 
-  this.wrap = wr.DIV_cc("ui_dialog_wrap", [
+  this.wrap = wr.div_cc("ui_dialog_wrap", [
     this.buttonClose,
     this.content
   ]);
 
-  this.node = wr.DIV_cc("ui_dialog", [
+  this.node = wr.div_cc("ui_dialog", [
     this.overlay,
-    wr.DIV_cc("ui_dialog_scroll", [
+    wr.div_cc("ui_dialog_scroll", [
       this.wrap
     ])
   ]);

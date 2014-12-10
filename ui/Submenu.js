@@ -18,12 +18,12 @@ wr.inherit(ui.Submenu, wr.View);
 
 
 ui.Submenu.prototype.create = function() {
-  this.label = wr.DIV_ct("ui_submenu_label", this.labelText);
-  this.options = wr.DIV_c("ui_submenu_options");
+  this.label = wr.div_ct("ui_submenu_label", this.labelText);
+  this.options = wr.div_c("ui_submenu_options");
 
   wr.hide(this.options);
 
-  this.node = wr.DIV_cc("ui_submenu", [
+  this.node = wr.div_cc("ui_submenu", [
     this.label,
     this.options
   ]);

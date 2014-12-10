@@ -14,12 +14,12 @@ wr.inherit(ui.GalleryEdit, wr.View);
 
 
 ui.GalleryEdit.prototype.create = function() {
-  this.thumbs = wr.DIV_c("ui_galleryedit_thumbs");
+  this.thumbs = wr.div_c("ui_galleryedit_thumbs");
   this.buttonAdd = ui.create(ui.Upload, {userClass: "ui_galleryedit_buttonadd", multiple: true, userText: "Добавить"});
 
-  this.node = wr.DIV_cc("ui_galleryedit", [
+  this.node = wr.div_cc("ui_galleryedit", [
     this.thumbs,
-    wr.DIV_cc("buttons", [
+    wr.div_cc("buttons", [
       this.buttonAdd.node
     ])
   ]);

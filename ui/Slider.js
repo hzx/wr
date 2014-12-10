@@ -8,11 +8,11 @@ wr.inherit(ui.Slider, wr.View);
 
 
 ui.Slider.prototype.create = function() {
-  this.slides = wr.DIV_c("ui_slider_slides");
-  this.nextButton = wr.DIV_c("ui_slider_next");
-  this.prevButton = wr.DIV_c("ui_slider_prev");
+  this.slides = wr.div_c("ui_slider_slides");
+  this.nextButton = wr.div_c("ui_slider_next");
+  this.prevButton = wr.div_c("ui_slider_prev");
 
-  this.node = wr.DIV_cc("ui_slider", [
+  this.node = wr.div_cc("ui_slider", [
     this.slides,
     this.nextButton,
     this.prevButton

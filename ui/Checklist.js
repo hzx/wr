@@ -8,7 +8,7 @@ wr.inherit(ui.Checklist, wr.View);
 
 
 ui.Checklist.prototype.create = function() {
-  this.node = wr.DIV_c("ui_checklist");
+  this.node = wr.div_c("ui_checklist");
 };
 
 

@@ -7,7 +7,7 @@ wr.View = function() {
 
 
 wr.View.prototype.create = function() {
-  this.node = wr.DIV_c("wr_view");
+  this.node = wr.div_c("wr_view");
 };
 
 

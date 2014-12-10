@@ -16,14 +16,14 @@ wr.inherit(ui.Edit, wr.View);
 
 
 ui.Edit.prototype.create = function() {
-  this.input = wr.INPUT_c("ui_edit_input");
+  this.input = wr.input_c("ui_edit_input");
   this.input.value = this.value;
   this.input.type = this.type;
-  this.wrap = wr.DIV_cc("ui_edit_wrap", [
+  this.wrap = wr.div_cc("ui_edit_wrap", [
     this.input
   ]);
 
-  this.node = wr.DIV_cc("ui_edit", [
+  this.node = wr.div_cc("ui_edit", [
     this.wrap
   ]);
 
