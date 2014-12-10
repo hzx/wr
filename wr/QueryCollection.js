@@ -53,6 +53,30 @@ wr.QueryCollection.prototype.compare = function(a, b) {
 };
 
 
+wr.QueryCollection.prototype.reset = function(objs) {
+  this.objs = {}
+  this.ids = [];
+  var obj;
+  var id;
+
+  for (var i = 0, length = objs.length; i < length; ++i) {
+    obj = objs[i];
+    id = obj[1];
+
+    // skip doubles
+    if (id in this.objs) {
+      continue;
+    }
+
+    // this.objs[id] = this.unserialize(obj);
+    this.objs[id] = wr.clone(obj);
+    this.ids.push(id);
+  }
+
+  this.eventReset.notify(this);
+};
+
+
 wr.QueryCollection.prototype.onIdUpdate = function(old, id) {
   var obj = this.get(old);
   if (obj && this.query(obj)) this.updateId(old, id);
@@ -61,7 +85,7 @@ wr.QueryCollection.prototype.onIdUpdate = function(old, id) {
 
 wr.QueryCollection.prototype.onUpdate = function(id, params) {
   var obj = this.get(id);
-  if (this.query(obj)) this.update(id, params);
+  if (obj && this.query(obj)) this.update(id, params);
 };
 
 

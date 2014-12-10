@@ -43,8 +43,9 @@ ui.RadiolistWidget.prototype.updateId = function(old, id) {
 };
 
 
-ui.RadiolistWidget.prototype.update = function(id) {
-  this.node.updateText(id, obj[this.nameCode]);
+ui.RadiolistWidget.prototype.update = function(id, params) {
+  if (this.nameCode in params)
+    this.node.updateText(id, params[this.nameCode]);
 };
 
 

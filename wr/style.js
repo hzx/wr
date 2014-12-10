@@ -12,20 +12,20 @@ wr.initQueue_.push(function() {
   // wr.getStyle = function(element, name) {
   //   element.style[name];
   // };
-
-  // IE
-  if (foo.currentStyle) {
-    wr.getStyle = function(element, name) {
-      return element.currentStyle[name];
-    };
-    return;
-  }
-
+  
   // W3C
   if (document.defaultView && document.defaultView.getComputedStyle) {
     wr.getStyle = function(element, name) {
       var s = document.defaultView.getComputedStyle(element, "");
       return s && s.getPropertyValue(name);
+    };
+    return;
+  }
+
+  // IE
+  if (foo.currentStyle) {
+    wr.getStyle = function(element, name) {
+      return element.currentStyle[name];
     };
     return;
   }

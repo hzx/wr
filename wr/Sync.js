@@ -13,11 +13,10 @@ wr.SYNC_OP_REMOVE = 4;
 wr.SYNC_OP_MOVE = 5;
 
 
-wr.Sync = function(url, name, collection, xsrf) {
+wr.Sync = function(url, name, collection) {
   this.url = url;
   this.name = name;
   this.collection = collection;
-  // this.xsrf = xsrf;
   this.orderField = null; // for subcollection only
 
   this.meUpdate = wr.bind(this, this.onUpdate);
@@ -60,17 +59,10 @@ wr.Sync.prototype.onUpdate = function(id, params) {
   var me = this;
 
   wr.post(this.url, data, world.xsrf, function(response) { // success
-    var params = me.collection.unserialize(response);
-    me.collection.updateLocal(id, params);
-    // update additional fields
-    // var rows = response.split(wr.DELIM_ROW);
-    // var id = rows[0];
-    // var fields = rows[1];
-    // var updates = {};
-    // for (var i = 0, length = fields.length; i < length; i += 2) {
-    //   updates[fields[i]] = fields[i+1];
-    // }
-    // me.collection.update(id, updates);
+    if (response.length > 0) {
+      var params = me.collection.unserialize(response);
+      me.collection.updateLocal(id, params);
+    }
   }, function(status, response) { // fail
   });
 };
@@ -92,11 +84,10 @@ wr.Sync.prototype.onInsert = function(obj, beforeId) {
   var me = this;
 
   wr.post(this.url, data, world.xsrf, function(response) { // success
-    var params = me.collection.unserialize(response);
-    me.collection.updateLocal(obj[1], params);
-    // update id
-    // var ids = response.split(wr.DELIM_FIELD);
-    // me.collection.updateId(ids[0], ids[1]);
+    if (response.length > 0) {
+      var params = me.collection.unserialize(response);
+      me.collection.updateLocal(obj[1], params);
+    }
   }, function(status, response) { // fail
   });
 };
@@ -113,8 +104,10 @@ wr.Sync.prototype.onAppend = function(obj) {
   var me = this;
 
   wr.post(this.url, data, world.xsrf, function(response) { // success
-    var params = me.collection.unserialize(response);
-    me.collection.updateLocal(obj[1], params);
+    if (response.length > 0) {
+      var params = me.collection.unserialize(response);
+      me.collection.updateLocal(obj[1], params);
+    }
     // update id
     // var ids = response.split(wr.DELIM_FIELD);
     // me.collection.updateId(ids[0], ids[1]);

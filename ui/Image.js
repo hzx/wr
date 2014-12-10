@@ -1,13 +1,11 @@
 
 ui.Image = function() {
-  wr.construct(ui.Image, this);
+  ui.Image.base.constructor.call(this);
 
   // for user, init before create
   this.userClass = "";
   this.src = "";
 };
-
-
 wr.inherit(ui.Image, wr.View);
 
 

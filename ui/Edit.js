@@ -74,6 +74,8 @@ ui.Edit.prototype.setValue = function(value) {
   this.value = value;
   this.input.value = value;
 
+  this.validate();
+
   this.eventChange.notify2(old, value);
 };
 

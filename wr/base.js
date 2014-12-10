@@ -25,6 +25,13 @@ wr.augment = function(dest, src) {
 };
 
 
+wr.clone = function(obj) {
+  var c = {};
+  wr.augment(c, obj);
+  return c;
+};
+
+
 wr.bind = function(context, func) {
   return function() {
     return func.apply(context, arguments);

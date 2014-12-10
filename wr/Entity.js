@@ -51,8 +51,3 @@ wr.Entity.prototype.updateLocal = function(params) {
   this.update(params);
   this.sync = true;
 };
-
-
-wr.entity = function(modelClass) {
-  return new wr.Entity(new modelClass());
-};

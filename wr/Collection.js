@@ -111,7 +111,9 @@ wr.Collection.prototype.update = function(id, params) {
     }
   }
 
-  if (wr.isEmpty(updates)) this.eventUpdate.notify2(id, updates);
+  if (!wr.isEmpty(updates)) {
+    this.eventUpdate.notify2(id, updates);
+  }
 };
 
 
@@ -285,9 +287,6 @@ wr.Collection.prototype.filter = function(fn) {
     if (!fn(obj)) ids.push(obj[1]);
   }
 
-  wr.log("Collection.filter:");
-  wr.log(ids);
-
   for (var r = 0, length = ids.length; r < length; ++r)
     this.remove(ids[r]);
 };
@@ -312,9 +311,4 @@ wr.Collection.prototype.prev = function(id) {
   }
 
   return null;
-};
-
-
-wr.coll = function(modelClass) {
-  return new wr.Collection(modelClass ? new modelClass() : null);
 };

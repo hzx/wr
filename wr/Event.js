@@ -2,19 +2,20 @@
 wr.Event = function() {
   this.handlers = {};
 };
-wr.Event.hasher = new wr.Hasher();
 
 
 wr.Event.prototype.listen = function(handler) {
   if (!handler.hash) {
-    handler.hash = wr.Event.hasher.generate();
+    handler.hash = wr.hash();
   }
+
   this.handlers[handler.hash] = handler;
 };
 
 
 wr.Event.prototype.unlisten = function(handler) {
-  delete this.handlers[handler.hash];
+  if (handler.hash)
+    delete this.handlers[handler.hash];
 };
 
 

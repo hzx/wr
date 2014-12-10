@@ -39,7 +39,8 @@ ui.ComboboxWidget.prototype.empty = function() {
 
 
 ui.ComboboxWidget.prototype.update = function(id, params) {
-  this.node.updateText(id, params[this.nameCode]);
+  if (this.nameCode in params)
+    this.node.updateText(id, params[this.nameCode]);
 };
 
 

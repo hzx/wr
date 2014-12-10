@@ -1,5 +1,4 @@
 
-wr.netHasher = new wr.Hasher();
 wr.eventConnectionError = new wr.Event();
 wr.eventClientError = new wr.Event();
 wr.eventServerError = new wr.Event();
@@ -54,7 +53,7 @@ wr.notifyFail = function(status, response) {
 
 
 wr.saltUrl = function(url) {
-  return url + (/\?/.test(url) ? "&" : "?") + wr.netHasher.generate();
+  return url + (/\?/.test(url) ? "&" : "?") + wr.hash();
 };
 
 

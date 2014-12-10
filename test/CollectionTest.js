@@ -2,6 +2,14 @@
 var CollectionTest = TestCase("CollectionTest");
 
 
+CollectionTest.prototype.setUp = function() {
+};
+
+
+CollectionTest.prototype.tearDown = function() {
+};
+
+
 CollectionTest.prototype.testInsert = function() {
   // assertTrue(false);
 };
