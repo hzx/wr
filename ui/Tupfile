@@ -11,11 +11,11 @@ Gallery.js\
 GalleryEdit.js\
 Slider.js\
 Combobox.js\
-ComboboxWidget.js\
+ReactiveCombobox.js\
 Checkbox.js\
 Checklist.js\
 Radiolist.js\
-RadiolistWidget.js\
+ReactiveRadiolist.js\
 Calendar.js\
 Progressbar.js\
 Scrollbar.js\

@@ -1,7 +1,7 @@
 
-// TODO: fusion Widget and Container
-wr.Widget = function(collection) {
-  wr.Widget.base.constructor.call(this);
+// TODO: fusion ReactiveElement and Container
+wr.ReactiveElement = function(collection) {
+  wr.ReactiveElement.base.constructor.call(this);
 
   this.userClass = "";
 
@@ -17,22 +17,22 @@ wr.Widget = function(collection) {
   this.meRemove = wr.bind(this, this.onRemove);
   this.meMove = wr.bind(this, this.onMove);
 };
-wr.inherit(wr.Widget, wr.View);
+wr.inherit(wr.ReactiveElement, wr.View);
 
 
-wr.Widget.prototype.create = function() {
+wr.ReactiveElement.prototype.create = function() {
   this.node = wr.div_c(this.userClass);
 };
 
 
-wr.Widget.prototype.createItem = function(obj) {
-  wr.log("override Widget.createItem");
+wr.ReactiveElement.prototype.createItem = function(obj) {
+  wr.log("override ReactiveElement.createItem");
   return null;
 };
 
 
-wr.Widget.prototype.enter = function() {
-  wr.Widget.base.enter.call(this);
+wr.ReactiveElement.prototype.enter = function() {
+  wr.ReactiveElement.base.enter.call(this);
 
   this.collection.eventIdUpdate.listen(this.meIdUpdate);
   this.collection.eventUpdate.listen(this.meUpdate);
@@ -48,8 +48,8 @@ wr.Widget.prototype.enter = function() {
 };
 
 
-wr.Widget.prototype.exit = function() {
-  wr.Widget.base.exit.call(this);
+wr.ReactiveElement.prototype.exit = function() {
+  wr.ReactiveElement.base.exit.call(this);
 
   this.collection.eventIdUpdate.unlisten(this.meIdUpdate);
   this.collection.eventUpdate.unlisten(this.meUpdate);
@@ -65,17 +65,17 @@ wr.Widget.prototype.exit = function() {
 };
 
 
-wr.Widget.prototype.listenItem = function(element) {
-  wr.log("override Widget.listenItem");
+wr.ReactiveElement.prototype.listenItem = function(element) {
+  wr.log("override ReactiveElement.listenItem");
 };
 
 
-wr.Widget.prototype.unlistenItem = function(element) {
-  wr.log("override Widget.unlistenItem");
+wr.ReactiveElement.prototype.unlistenItem = function(element) {
+  wr.log("override ReactiveElement.unlistenItem");
 };
 
 
-wr.Widget.prototype.removeElement = function(element) {
+wr.ReactiveElement.prototype.removeElement = function(element) {
   if (this.isEnter) {
     this.unlistenItem(element);
   }
@@ -84,7 +84,7 @@ wr.Widget.prototype.removeElement = function(element) {
 };
 
 
-wr.Widget.prototype.empty = function() {
+wr.ReactiveElement.prototype.empty = function() {
   this.elements = {};
 
   var child = this.node.firstChild;
@@ -97,7 +97,7 @@ wr.Widget.prototype.empty = function() {
 };
 
 
-wr.Widget.prototype.insertElement = function(element, beforeId) {
+wr.ReactiveElement.prototype.insertElement = function(element, beforeId) {
   if (!beforeId || !(beforeId in this.elements)) {
     // insert in beginning
     this.node.insertBefore(element, this.node.firstChild);
@@ -111,7 +111,7 @@ wr.Widget.prototype.insertElement = function(element, beforeId) {
 };
 
 
-wr.Widget.prototype.updateId = function(old, id) {
+wr.ReactiveElement.prototype.updateId = function(old, id) {
   // update id in elements
   var element = this.elements[old];
   if (!element) return;
@@ -123,12 +123,12 @@ wr.Widget.prototype.updateId = function(old, id) {
 };
 
 
-wr.Widget.prototype.update = function(id, params) {
-  wr.log("override Widget.update");
+wr.ReactiveElement.prototype.update = function(id, params) {
+  wr.log("override ReactiveElement.update");
 };
 
 
-wr.Widget.prototype.insert = function(obj, beforeId) {
+wr.ReactiveElement.prototype.insert = function(obj, beforeId) {
   var element = this.createItem(obj);
   element.objId = obj[1];
 
@@ -136,7 +136,7 @@ wr.Widget.prototype.insert = function(obj, beforeId) {
 };
 
 
-wr.Widget.prototype.append = function(obj) {
+wr.ReactiveElement.prototype.append = function(obj) {
   var id = obj[1];
   var element = this.createItem(obj);
   element.objId = id;
@@ -149,7 +149,7 @@ wr.Widget.prototype.append = function(obj) {
 };
 
 
-wr.Widget.prototype.remove = function(id) {
+wr.ReactiveElement.prototype.remove = function(id) {
   if (!(id in this.elements)) return;
   var element = this.elements[id];
 
@@ -158,7 +158,7 @@ wr.Widget.prototype.remove = function(id) {
 };
 
 
-wr.Widget.prototype.move = function(id, beforeId) {
+wr.ReactiveElement.prototype.move = function(id, beforeId) {
   if (!(id in this.elements)) return;
   var element = this.elements[id];
 
@@ -168,17 +168,17 @@ wr.Widget.prototype.move = function(id, beforeId) {
 };
 
 
-wr.Widget.prototype.onIdUpdate = function(old, id) {
+wr.ReactiveElement.prototype.onIdUpdate = function(old, id) {
   this.updateId(old, id);
 };
 
 
-wr.Widget.prototype.onUpdate = function(id, params) {
+wr.ReactiveElement.prototype.onUpdate = function(id, params) {
   this.update(id, params);
 };
 
 
-wr.Widget.prototype.onReset = function() {
+wr.ReactiveElement.prototype.onReset = function() {
   this.empty();
 
   var me = this;
@@ -188,21 +188,21 @@ wr.Widget.prototype.onReset = function() {
 };
 
 
-wr.Widget.prototype.onInsert = function(obj, beforeId) {
+wr.ReactiveElement.prototype.onInsert = function(obj, beforeId) {
   this.insert(obj, beforeId);
 };
 
 
-wr.Widget.prototype.onAppend = function(obj) {
+wr.ReactiveElement.prototype.onAppend = function(obj) {
   this.append(obj);
 };
 
 
-wr.Widget.prototype.onRemove = function(id) {
+wr.ReactiveElement.prototype.onRemove = function(id) {
   this.remove(id);
 };
 
 
-wr.Widget.prototype.onMove = function(id, beforeId) {
+wr.ReactiveElement.prototype.onMove = function(id, beforeId) {
   this.move(id, beforeId);
 };

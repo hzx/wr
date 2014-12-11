@@ -24,7 +24,7 @@ Collection.js\
 QueryCollection.js\
 Entity.js\
 View.js\
-Widget.js\
+ReactiveElement.js\
 DragDrop.js\
 net.js\
 db_types.js\
