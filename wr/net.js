@@ -33,21 +33,13 @@ wr.notifyFail = function(status, response) {
     return;
   }
 
-  var message;
-
-  try {
-    message = response["message"];
-  } catch (e) {
-    message = "Ошибка " + status;
-  }
-
   if (status >= 400 && status < 500) {
-    wr.eventClientError.notify(message);
+    wr.eventClientError.notify2(status, response);
     return;
   }
 
   if (status >= 500 && status < 600) {
-    wr.eventServerError.notify(message);
+    wr.eventServerError.notify2(status, response);
   }
 };
 
