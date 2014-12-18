@@ -312,3 +312,15 @@ wr.Collection.prototype.prev = function(id) {
 
   return null;
 };
+
+
+wr.Collection.prototype.parse = function(data) {
+  data = wr.trimString(data);
+  if (data.length === 0) return;
+
+  var rows = data.split(wr.DELIM_ROW);
+
+  for (var i = 0, length = rows.length; i < length; ++i) {
+    this.appendLocal(this.unserialize(rows[i]));
+  }
+};
