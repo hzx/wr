@@ -2,9 +2,6 @@
 
 wr.App = function() {
   this.handlers = {};
-  this.handler403 = null;
-  this.handler404 = null;
-  this.handler500 = null;
   this.meRouterDispatch = wr.bind(this, this.onRouterDispatch);
 };
 
@@ -26,5 +23,6 @@ wr.App.prototype.onRouterDispatch = function(slugs) {
     this.handlers[slugs[0]](slugs);
     return;
   }
-  this.handler404(slugs);
+  wr.log("Адрес не найден:");
+  wr.log(slugs);
 };
