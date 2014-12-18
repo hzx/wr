@@ -137,6 +137,14 @@ ui.Radiolist.prototype.getSelected = function() {
 };
 
 
+ui.Radiolist.prototype.select = function(id) {
+  var option = this.get(id);
+  if (option) {
+    this.selectOption(option, false);
+  }
+};
+
+
 ui.Radiolist.prototype.selectOption = function(element, silent) {
   // not select twice
   if (this.last === element) {
