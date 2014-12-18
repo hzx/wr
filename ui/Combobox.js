@@ -190,13 +190,13 @@ ui.Combobox.prototype.getSelected = function() {
 
 
 ui.Combobox.prototype.select = function(id) {
-  var option = this.getOption(id);
+  var option = this.get(id);
   if (option) this.selectOption(option, true);
 };
 
 
 ui.Combobox.prototype.selectSilent = function(id) {
-  var option = this.getOption(id);
+  var option = this.get(id);
   if (option) this.selectOption(option, false);
 };
 
