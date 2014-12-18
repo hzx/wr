@@ -70,12 +70,9 @@ wr.Model.prototype.unserialize = function(val) {
 
   for (var i = 0, length = fields.length; i < length; i += 2) {
     name = fields[i];
+    if (name.length == 0) return dest;
     dest[name] = this.unserializeValue(name, fields[i+1]);
   }
-
-  // for (var name in obj) {
-  //   dest[name] = this.unserializeValue(name, obj[name]);
-  // }
 
   return dest;
 };
@@ -87,7 +84,7 @@ wr.Model.prototype.createDefault = function() {
     obj[name] = this.fields[name].def;
   }
 
-  obj.id = wr.hash();
+  obj[1] = wr.hash();
 
   return obj;
 };
