@@ -51,6 +51,9 @@ wr.World.prototype.parse = function(data) {
 
 
 wr.World.prototype.parseCollection = function(rows, left, right) {
+  // skip one empty row
+  if (rows[left].length === 0) return left + 1;
+
   // parse first row, must contain name and count
   var fields = rows[left].split(wr.DELIM_FIELD);
   var name = parseInt(fields[0]);
@@ -69,7 +72,6 @@ wr.World.prototype.parseCollection = function(rows, left, right) {
     else
       wr.log("unknown entity or collection: " + name);
   }
-
 
   return end;
 };
