@@ -30,8 +30,8 @@ wr.World.prototype.post = function(url, data, success, fail) {
 };
 
 
-wr.World.prototype.postFiles = function(url, files, success, fail, progress) {
-  wr.postFiles(url, files, this.xsrf, function(response) { // success
+wr.World.prototype.postFiles = function(url, files, hash, success, fail, progress) {
+  wr.postFiles(url, files, hash, this.xsrf, function(response) { // success
     success(response);
   }, function(status, response) { // fail
     fail(status, response);

@@ -124,7 +124,7 @@ wr.post = function(url, data, xsrf, success, fail, progress) {
 };
 
 
-wr.postFiles = function(url, files, xsrf, success, fail, progress) {
+wr.postFiles = function(url, files, hash, xsrf, success, fail, progress) {
   var data = new FormData();
   var file;
 
@@ -137,7 +137,8 @@ wr.postFiles = function(url, files, xsrf, success, fail, progress) {
     method: "POST",
     headers: {
       "Content-Type": "multipart/form-data",
-      "X-Xsrftoken": xsrf
+      "X-Xsrftoken": xsrf,
+      "X-Hash": hash
     },
     url: url,
     data: data,

@@ -10,6 +10,9 @@ ui.Upload = function() {
   this.isOpen = false;
 
   this.eventChange = new wr.Event();
+  this.meInputChange = wr.bind(this, this.onInputChange);
+  this.meInputFocus = wr.bind(this, this.onInputFocus);
+  this.meInputBlur = wr.bind(this, this.onInputBlur);
 };
 wr.inherit(ui.Upload, wr.View);
 
@@ -29,11 +32,26 @@ ui.Upload.prototype.create = function() {
   wr.addClass(this.node, this.userClass);
 
   this.events = [
-    [this.node, "click", wr.bind(this, this.onClick)],
-    [this.input, "change", wr.bind(this, this.onInputChange)],
-    [this.input, "focus", wr.bind(this, this.onInputFocus)],
-    [this.input, "blur", wr.bind(this, this.onInputBlur)]
+    [this.node, "click", wr.bind(this, this.onClick)]
   ];
+};
+
+
+ui.Upload.prototype.enter = function() {
+  ui.Upload.base.enter.call(this);
+
+  wr.listen(this.input, "change", this.meInputChange);
+  wr.listen(this.input, "focus", this.meInputFocus);
+  wr.listen(this.input, "blur", this.meInputBlur);
+};
+
+
+ui.Upload.prototype.exit = function() {
+  ui.Upload.base.exit.call(this);
+
+  wr.unlisten(this.input, "change", this.meInputChange);
+  wr.unlisten(this.input, "focus", this.meInputFocus);
+  wr.unlisten(this.input, "blur", this.meInputBlur);
 };
 
 

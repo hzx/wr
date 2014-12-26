@@ -64,6 +64,8 @@ wr.Model.prototype.unserializeValue = function(name, value) {
 
 
 wr.Model.prototype.unserialize = function(val) {
+  if (val.length === 0) return null;
+
   var dest = {};
   var fields = val.split(wr.DELIM_FIELD);
   var name;

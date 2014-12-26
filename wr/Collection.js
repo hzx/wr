@@ -117,6 +117,18 @@ wr.Collection.prototype.update = function(id, params) {
 };
 
 
+wr.Collection.prototype.updateRaw = function(id, raw) {
+  var params = this.unserialize(raw);
+  this.updateLocal(id, params);
+};
+
+
+wr.Collection.prototype.appendRaw = function(raw) {
+  var obj = this.unserialize(raw);
+  this.appendLocal(obj);
+};
+
+
 wr.Collection.prototype.insertLocal = function(obj, beforeId) {
   this.sync = false;
   this.insert(obj, beforeId);
@@ -319,8 +331,10 @@ wr.Collection.prototype.parse = function(data) {
   if (data.length === 0) return;
 
   var rows = data.split(wr.DELIM_ROW);
+  var obj;
 
   for (var i = 0, length = rows.length; i < length; ++i) {
-    this.appendLocal(this.unserialize(rows[i]));
+    obj = this.unserialize(rows[i]);
+    if (obj !== null) this.appendLocal(obj);
   }
 };
