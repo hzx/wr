@@ -18,6 +18,51 @@ wr.unlistenBunch = function(bunch) {
 };
 
 
+wr.tag = function(name, events, props, value, childs) {
+  // var el = wr.createElement(name);
+  var tag = new Tag(name);
+  
+  if (events) {
+    tag.events = events;
+  }
+
+  if (props) {
+  }
+
+  if (value) {
+    tag.setValue(value);
+  }
+
+  if (childs) {
+    for (var i = 0, length = childs.length; i < length; ++i)
+      tag.append
+  }
+
+  return tag;
+};
+
+
+wr.view = function(clas, events, props, childs) {
+  var view = new clas();
+
+  // TODO: refactor work with events
+  if (events) view.addEvents(events);
+
+  if (props) 
+    for (var i = 0, length = props.length; i < length; i+=2)
+      view[props[i]] = props[i+1];
+
+  view.element = view.create();
+
+  if (childs)
+    for (var i = 0, length = childs.length; i < length; ++i)
+      view.append(childs[i]);
+
+
+  return view;
+};
+
+
 wr.div_c = function(className) {
   var node = wr.createElement(wr.DIV);
   wr.addClass(node, className);

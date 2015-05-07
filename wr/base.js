@@ -3,6 +3,24 @@ var wr = {};
 wr.global = this;
 
 
+wr.modules__ = {};
+
+
+wr.exportModule = function(names, module) {
+
+  // var last = wr.modules__;
+  // for (var i = 0; i < names.length; ++i) {
+  //   if (!(names[i] in last)) {
+  //     last[names[i]] = {};
+  //   }
+  //   last = last[names[i]];
+  // }
+
+  // if (names.length > 0)
+  //   last = module;
+};
+
+
 wr.inherit = function(child, base) {
   var tmp = function() {};
   tmp.prototype = base.prototype;

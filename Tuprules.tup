@@ -11,8 +11,9 @@ datetime.js\
 validate.js\
 events.js\
 dom.js\
-dom_utils.js\
 style.js\
+Tag.js\
+dom_utils.js\
 splines.js\
 animation.js\
 fx.js\
